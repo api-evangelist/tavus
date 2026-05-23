@@ -1,0 +1,157 @@
+aid: tavus
+name: Tavus
+description: >-
+  Tavus builds the Conversational Video Interface (CVI), an end-to-end
+  pipeline that combines AI behavior with lifelike digital humans for
+  real-time video conversations. The platform lets developers create
+  personal AI replicas from a short video or a single image (Phoenix-4 and
+  image-to-replica), generate async personalized videos, and run real-time
+  conversational sessions backed by configurable personas, custom LLMs,
+  tools, and document knowledge bases. Tavus targets product teams
+  embedding human-like AI into sales, support, healthcare, education, and
+  recruiting experiences, and monetizes through usage-based developer
+  pricing and enterprise contracts.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Artificial Intelligence
+  - Generative AI
+  - Video
+  - Conversational AI
+  - Avatars
+  - Replicas
+  - Personalization
+  - Real Time
+  - CVI
+  - Webhooks
+url: https://raw.githubusercontent.com/api-evangelist/tavus/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: tavus:tavus-api
+    name: Tavus API
+    description: >-
+      The Tavus REST API powers personalized video generation and real-time
+      Conversational Video Interface sessions. It exposes endpoints for
+      replicas (Phoenix-4 video and image-to-replica), async video
+      generation, real-time conversations, personas, and document knowledge
+      bases, plus webhooks for lifecycle events.
+    humanURL: https://docs.tavus.io/
+    baseURL: https://tavusapi.com
+    tags:
+      - Video
+      - Conversational AI
+      - Replicas
+      - Personas
+      - Real Time
+      - Knowledge Base
+    properties:
+      - type: Documentation
+        url: https://docs.tavus.io/
+      - type: GettingStarted
+        url: https://docs.tavus.io/sections/introduction
+      - type: SignUp
+        url: https://platform.tavus.io/auth/sign-up
+      - type: API
+        url: https://docs.tavus.io/api-reference/overview
+      - type: SDK
+        url: https://www.npmjs.com/package/@tavus/cvi-ui
+      - type: GitHubRepository
+        url: https://github.com/Tavus-Engineering/tavus-examples
+      - type: Pricing
+        url: https://www.tavus.io/pricing
+      - type: Authentication
+        url: https://docs.tavus.io/api-reference/authentication
+    features:
+      - name: Phoenix-4 Replicas
+        description: >-
+          Train high-fidelity replicas from a short training video.
+      - name: Image-to-Replica
+        description: >-
+          Generate replicas from a single image for faster onboarding.
+      - name: Stock Replicas
+        description: >-
+          Use pre-built stock replicas for instant integration.
+      - name: Async Video Generation
+        description: >-
+          Create personalized videos from scripts or audio with replica and
+          background customization.
+      - name: Real-Time Conversations
+        description: >-
+          Spin up live AI video conversations with audio-only mode, closed
+          captions, participant limits, and private rooms.
+      - name: Personas
+        description: >-
+          Configure replica behavior, guardrails, objectives, and tool
+          calling, including support for custom LLMs.
+      - name: Knowledge Base
+        description: >-
+          Upload, recrawl, and manage documents and websites to ground
+          replica responses.
+      - name: React CVI Components
+        description: >-
+          Embed conversational video into web apps using the @tavus/cvi-ui
+          React component library and hooks.
+      - name: Webhooks
+        description: >-
+          Receive callbacks for video, conversation, and replica lifecycle
+          events.
+    useCases:
+      - name: AI Sales Reps
+        description: >-
+          Conduct lifelike video discovery and demo calls with a digital
+          rep.
+      - name: Healthcare Intake
+        description: >-
+          Walk patients through intake and screening with empathetic video
+          AI.
+      - name: Personalized Outreach Video
+        description: >-
+          Generate per-recipient videos for marketing and recruiting at
+          scale.
+      - name: AI Tutors and Coaching
+        description: >-
+          Deliver interactive video tutoring grounded in course content.
+      - name: Customer Support Avatars
+        description: >-
+          Provide always-on conversational video support inside web and
+          mobile apps.
+    integrations:
+      - name: React
+      - name: Daily
+      - name: Custom LLMs
+      - name: Webhooks
+      - name: Slack
+      - name: Zapier
+    authentication:
+      - type: API Key
+        description: >-
+          API keys are generated in the Tavus Developer Portal and sent in
+          the x-api-key header on every request.
+common:
+  - type: Website
+    url: https://www.tavus.io
+  - type: Documentation
+    url: https://docs.tavus.io
+  - type: Blog
+    url: https://www.tavus.io/blog
+  - type: GitHubOrganization
+    url: https://github.com/Tavus-Engineering
+  - type: Pricing
+    url: https://www.tavus.io/pricing
+  - type: TermsOfService
+    url: https://www.tavus.io/legal/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.tavus.io/legal/privacy-policy
+  - type: X
+    url: https://x.com/heyTavus
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/tavus
+  - type: ChangeLog
+    url: https://docs.tavus.io/changelog
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
