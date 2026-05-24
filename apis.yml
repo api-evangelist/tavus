@@ -152,6 +152,8 @@ common:
     url: https://www.linkedin.com/company/tavus
   - type: ChangeLog
     url: https://docs.tavus.io/changelog
+  - type: LLMsTxt
+    url: https://docs.tavus.io/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
