@@ -1,0 +1,1637 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lipsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Lipsyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/lipsync",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of lipsyncs to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a list of all Lipsyncs created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/lipsync",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nCreate a new lipsync video by providing a video URL and an audio URL. The service will synchronize the speaker's mouth movements with the provided audio.\n"
+        },
+        {
+          "info": {
+            "name": "Get Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/lipsync/:lipsync_id",
+            "params": [
+              {
+                "name": "lipsync_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the lipsync request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a single lipsync by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/lipsync/:lipsync_id",
+            "params": [
+              {
+                "name": "lipsync_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the lipsync request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint deletes a single lipsync by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Replacements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Replacements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replacements",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of replacements to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a list of all Replacements created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Replacement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/replacements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint creates a test word replacement request that will modify specific words or phrases in an existing video.\n"
+        },
+        {
+          "info": {
+            "name": "Get Replacement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replacements/:replacement_id",
+            "params": [
+              {
+                "name": "replacement_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the replacement."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a single replacement by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Replacement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/replacements/:replacement_id",
+            "params": [
+              {
+                "name": "replacement_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the replacement."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint deletes a single replacement by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Videos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/videos",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of videos to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return (0-indexed). Default is 0 (first page)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Videos created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Generate Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/videos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint generates a new video using a Replica and either a script or an audio file.\n"
+        },
+        {
+          "info": {
+            "name": "Get Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/videos/:video_id",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the video."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional video data such as the thumbnail image and gif links."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single video by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/videos/:video_id",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video generation."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the video and associated assets (such as thumbnail images) will be hard deleted. CAUTION: This action is irrevocable."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single video by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Rename Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/videos/:video_id/name",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video generation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint renames a single video by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Replicas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Replicas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replicas",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of replicas to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional replica data such as the replica type."
+              },
+              {
+                "name": "replica_type",
+                "value": "",
+                "type": "query",
+                "description": "If set to user, the response will only include user replicas. If set to system, the response will only include stock replicas."
+              },
+              {
+                "name": "replica_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of replica ids to filter the response by. Example: `replica_ids=r90bbd427f71`"
+              },
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter the list to replicas trained on a specific Phoenix model (e.g. `phoenix-3`, `phoenix-4`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Replicas created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/replicas",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new replica from a training video or image URL for use in conversations—see [Which training path?](/sections/replica/which-training-path) for preparation, consent, and media requirements."
+        },
+        {
+          "info": {
+            "name": "Get Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the replica."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional replica data such as replica_type."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single Replica by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the replica."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the replica and associated assets (such as training footage) will be hard deleted. CAUTION: This action is irrevocable. Note that a hard delete of a replica does *not* delete the conversation created using said replica. See [Delete Video](https://docs.tavus.io/api-reference/video-request/delete-video) for more info."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a Replica by its unique ID; deleted replicas cannot be used in a conversation."
+        },
+        {
+          "info": {
+            "name": "Rename Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id/name",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the replica."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint renames a single Replica by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Voices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Voices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/voices",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (1–100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-based)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring match on `voice_name`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort `voice_name` ascending or descending."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "If set, only voices whose replica tags include this tag name (case-insensitive)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns available stock **`voice_name`** values and their linked **replica** metadata. When you [Create Replica](/api-reference/phoenix-replica-model/create-replica) with **`train_image_url`** (image-to-replica), **`voice_name`** is required—use this list to pick a valid slug and to preview options.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/conversations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of conversations to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter the conversations by status. Possible values: active, ended."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Conversations created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "createConversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/conversations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint starts a real-time video conversation with your AI replica, powered by a persona that allows it to see, hear, and respond like a human.\n"
+        },
+        {
+          "info": {
+            "name": "Get Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Append `verbose=true` to the URL to receive additional event data in the response, including:\n- `shutdown_reason`: The reason why the conversation ended (e.g., \"participant_left_timeout\")\n- `system.replica_joined`: When the replica joined the conversation\n- `system.shutdown`: When and why the conversation ended\n- `application.transcription_ready`: The end-of-call transcript. Each entry in `properties.transcript` has `role` (`user` / `assistant` / `system` / `tool`), `content`, `timestamp` (Unix epoch float, seconds), `seconds_from_start`, `duration` (seconds, float) and `inference_id` where available.\n- `application.perception_analysis`: The final visual analysis of the user that includes their appearance, behavior, emotional states, and screen activities\n\nThis is particularly useful as an alternative to using the `callback_url` parameter on the [create conversation](/api-reference/conversations/create-conversation) endpoint for retrieving detailed conversation data.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single conversation by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the conversation and associated assets will be hard deleted. CAUTION: This action is irrevocable."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single conversation by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "End Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id/end",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint ends a single conversation by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Personas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Personas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/personas",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of personas to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              },
+              {
+                "name": "persona_type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Personas created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Persona",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/personas",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a persona that configures how a replica behaves and sounds in CVI for every conversation that uses that persona."
+        },
+        {
+          "info": {
+            "name": "Get Persona",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/personas/:persona_id",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the persona."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single persona by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Patch Persona",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/personas/:persona_id",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the persona."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to update specific fields of a persona using JSON Patch operations."
+        },
+        {
+          "info": {
+            "name": "Delete Persona",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/personas/:persona_id",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the persona."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single persona by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transcriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Transcriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/transcriptions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of transcriptions to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Transcriptions created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Transcription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/transcriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a transcription request that will convert speech to text in your video content.\n"
+        },
+        {
+          "info": {
+            "name": "Get Transcription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/transcriptions/:transcription_id",
+            "params": [
+              {
+                "name": "transcription_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the transcription."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single transcription by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Transcription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/transcriptions/:transcription_id",
+            "params": [
+              {
+                "name": "transcription_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the transcription."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single transcription by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Objectives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Objectives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/objectives",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of objectives to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all objectives.\n"
+        },
+        {
+          "info": {
+            "name": "Create Objectives",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/objectives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates objectives for a persona.\n"
+        },
+        {
+          "info": {
+            "name": "Get Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single objective by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Patch Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to update specific fields of an objective using JSON Patch operations.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single objective by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Guardrails",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Guardrails (All Sets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/guardrails",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of guardrails to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all sets of guardrails.\n"
+        },
+        {
+          "info": {
+            "name": "Create Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/guardrails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new set of guardrails for a persona. Guardrails provide strict behavioral boundaries and guidelines that will be rigorously followed throughout conversations.\n"
+        },
+        {
+          "info": {
+            "name": "Get Guardrails (One Set)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single set of guardrails by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Patch Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to update specific fields of guardrails using JSON Patch operations."
+        },
+        {
+          "info": {
+            "name": "Delete Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single set of guardrails by its unique identifier.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/documents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of documents to return per page (default: 10)"
+              },
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Page number for pagination (0-based, default: 0)"
+              },
+              {
+                "name": "sort",
+                "value": "ascending",
+                "type": "query",
+                "description": "Sort direction for the results (default: ascending)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter documents by status"
+              },
+              {
+                "name": "name_or_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Search for documents by name or UUID"
+              },
+              {
+                "name": "tags",
+                "value": "important,meeting",
+                "type": "query",
+                "description": "Comma-separated list of tags to filter by"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of documents.\n"
+        },
+        {
+          "info": {
+            "name": "Create Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload documents to your knowledge base for personas to reference during conversations."
+        },
+        {
+          "info": {
+            "name": "Get Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "d8-5c71baca86fc",
+                "type": "path",
+                "description": "The unique identifier of the document to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve detailed information about a specific document using its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Update Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the document to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a document's `document_name` and `tags`."
+        },
+        {
+          "info": {
+            "name": "Delete Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the document to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a document and its associated data using its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Recrawl Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/documents/:document_id/recrawl",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "d8-5c71baca86fc",
+                "type": "path",
+                "description": "Unique id of the crawl-backed **website** document to refresh. Use when the source site changed, you want to refresh content on a schedule, or retry after crawl or processing errors.\n\nThe document must be in **`ready`** or **`error`** (otherwise `409`). It must have been created with a `crawl` configuration unless you supply `crawl` in the request body for this call.\n\nThe same document cannot be recrawled more than once within each **1-hour** cooldown (`429` if invoked too soon).\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Trigger a recrawl of a website document to fetch fresh content."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pronunciation Dictionaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Pronunciation Dictionaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results per page. Range: 1-100."
+              },
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Zero-based page number."
+              },
+              {
+                "name": "sort",
+                "value": "desc",
+                "type": "query",
+                "description": "Sort order by creation date."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all pronunciation dictionaries for the authenticated user with pagination.\n"
+        },
+        {
+          "info": {
+            "name": "Create Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a [pronunciation dictionary](/sections/conversational-video-interface/persona/pronunciation-dictionaries) with custom rules for controlling how words are spoken. Rules are automatically synced to both Cartesia and ElevenLabs so they work regardless of which TTS engine your persona uses.\n"
+        },
+        {
+          "info": {
+            "name": "Get Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a pronunciation dictionary by its ID, including all rules.\n"
+        },
+        {
+          "info": {
+            "name": "Update Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a pronunciation dictionary's name or rules using [JSON Patch](https://jsonpatch.com/) format (RFC 6902). Supported mutable fields are `name` and `rules`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary to delete.\n\n**Warning:** This action is permanent. The dictionary is deleted from both Cartesia and ElevenLabs, and all personas referencing it will have their `pronunciation_dictionary_id` set to `null` and provider-specific pronunciation settings removed from `voice_settings`.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Permanently delete a pronunciation dictionary and remove it from all linked personas.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
