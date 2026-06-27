@@ -53,11 +53,11 @@ apis:
         url: https://docs.tavus.io/
       - type: GettingStarted
         url: https://docs.tavus.io/sections/introduction
-      - type: SignUp
+      - type: Signup
         url: https://platform.tavus.io/auth/sign-up
       - type: API
         url: https://docs.tavus.io/api-reference/overview
-      - type: SDK
+      - type: SDKs
         url: https://www.npmjs.com/package/@tavus/cvi-ui
       - type: GitHubRepository
         url: https://github.com/Tavus-Engineering/tavus-examples
@@ -152,7 +152,7 @@ common:
     url: https://www.linkedin.com/company/tavus
   - type: ChangeLog
     url: https://docs.tavus.io/changelog
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.tavus.io/llms.txt
 maintainers:
   - FN: Kin Lane
