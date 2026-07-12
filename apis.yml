@@ -132,6 +132,12 @@ apis:
           API keys are generated in the Tavus Developer Portal and sent in
           the x-api-key header on every request.
 common:
+  - type: TrustCenter
+    url: security/tavus-trust-center.yml
+  - type: DomainSecurity
+    url: security/tavus-domain-security.yml
+  - type: Authentication
+    url: authentication/tavus-authentication.yml
   - type: Website
     url: https://www.tavus.io
   - type: Documentation
