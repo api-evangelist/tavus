@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Voices API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Voices
+paths:
+  /v2/voices:
+    get:
+      tags:
+      - Voices
+      summary: List Voices
+      description: 'Returns available stock **`voice_name`** values and their linked **replica** metadata. When you [Create Replica](/api-reference/phoenix-replica-model/create-replica) with **`train_image_url`** (image-to-replica), **`voice_name`** is required—use this list to pick a valid slug and to preview options.
+
+        '
+      operationId: getVoices
+      parameters:
+      - name: limit
+        in: query
+        description: Page size (1–100).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+      - name: page
+        in: query
+        description: Page number (1-based).
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: search
+        in: query
+        description: Case-insensitive substring match on `voice_name`.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort `voice_name` ascending or descending.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+      - name: tag
+        in: query
+        description: If set, only voices whose replica tags include this tag name (case-insensitive).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Voices for the current page; use `total_count`, `page`, and `limit` with the query parameters for pagination.
+                    items:
+                      type: object
+                      properties:
+                        voice_name:
+                          type: string
+                          description: Slug to pass as **`voice_name`** on Create Replica (image-to-replica).
+                          example: anna
+                        replica_id:
+                          type: string
+                          description: Replica identifier associated with this voice.
+                          example: r90bbd427f71
+                        audio_url:
+                          type: string
+                          nullable: true
+                          description: Optional preview URL (e.g. sample clip) when available.
+                        tags:
+                          type: array
+                          description: Tags from the replica record (e.g. for filtering).
+                          items:
+                            type: object
+                            properties:
+                              tag_name:
+                                type: string
+                  total_count:
+                    type: integer
+                    description: Total rows matching filters (before pagination).
+                  page:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Transcriptions API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Transcriptions
+paths:
+  /v2/transcriptions:
+    post:
+      tags:
+      - Transcriptions
+      summary: Create Transcription
+      description: 'This endpoint creates a transcription request that will convert speech to text in your video content.
+
+        '
+      operationId: createTranscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_url:
+                  type: string
+                  description: A direct link to the video that will be transcribed. This should be a publicly accessible / presigned S3 URL.
+                  example: https://example.com/video.mp4
+                callback_url:
+                  type: string
+                  description: A url that will receive a callback on completion of the transcription or on error.
+                  example: https://your-callback-url.com
+              required:
+              - file_url
+              - callback_url
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcription_id:
+                    type: string
+                    example: t0108f2d24k2a
+                    description: A unique identifier for the transcription.
+                  status:
+                    type: string
+                    description: The status of the transcription.
+                  callback_url:
+                    type: string
+                    description: The callback URL provided in the request.
+                    example: https://your-callback-url.com
+      security:
+      - apiKey: []
+    get:
+      tags:
+      - Transcriptions
+      summary: List Transcriptions
+      description: 'This endpoint returns a list of all Transcriptions created by the account associated with the API Key in use.
+
+        '
+      operationId: listTranscriptions
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of transcriptions to return per page. Default is 10.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return. Default is 1.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        transcription_id:
+                          type: string
+                          description: A unique identifier for the transcription.
+                          example: t0108f2d24k2a
+                        file_url:
+                          type: string
+                          description: The URL of the file that was transcribed.
+                          example: https://example.com/video.mp4
+                        text:
+                          type: string
+                          description: The transcribed text from the video.
+                        status:
+                          type: string
+                          description: The status of the transcription. Can be either `started`, `completed`, or `error`.
+                        created_at:
+                          type: string
+                          description: The date and time the transcription was created.
+                  total_count:
+                    type: integer
+                    description: The total number of transcriptions that fit the query.
+      security:
+      - apiKey: []
+  /v2/transcriptions/{transcription_id}:
+    get:
+      tags:
+      - Transcriptions
+      summary: Get Transcription
+      description: 'This endpoint returns a single transcription by its unique identifier.
+
+        '
+      operationId: getTranscription
+      parameters:
+      - in: path
+        name: transcription_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the transcription.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcription_id:
+                    type: string
+                    example: t0108f2d24k2a
+                    description: A unique identifier for the transcription.
+                  file_url:
+                    type: string
+                    description: The URL of the file that was transcribed.
+                    example: https://example.com/video.mp4
+                  text:
+                    type: string
+                    description: The transcribed text from the video.
+                  status:
+                    type: string
+                    description: The status of the transcription.
+                  created_at:
+                    type: string
+                    description: The date and time the transcription was created.
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Transcriptions
+      summary: Delete Transcription
+      description: 'This endpoint deletes a single transcription by its unique identifier.
+
+        '
+      operationId: deleteTranscription
+      parameters:
+      - in: path
+        name: transcription_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the transcription.
+      responses:
+        '204':
+          description: ''
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

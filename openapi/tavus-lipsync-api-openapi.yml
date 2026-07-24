@@ -1,0 +1,316 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Lipsync API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Lipsync
+paths:
+  /v2/lipsync:
+    post:
+      tags:
+      - Lipsync
+      summary: Create Lipsync
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        Create a new lipsync video by providing a video URL and an audio URL. The service will synchronize the speaker''s mouth movements with the provided audio.
+
+        '
+      operationId: createLipsync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original_video_url:
+                  type: string
+                  description: A direct link to the video that will be modified. This should be a publicly accessible / presigned S3 URL.
+                  example: https://example.com/video.mp4
+                source_audio_url:
+                  type: string
+                  description: A direct link to the audio file that will be synchronized with the video. This should be a publicly accessible / presigned S3 URL.
+                  example: https://example.com/audio.mp3
+                lipsync_name:
+                  type: string
+                  description: An optional name for the lipsync video.
+                  example: My Lipsync Video
+                callback_url:
+                  type: string
+                  description: A url that will receive a callback on completion of the lipsync or on error.
+                  example: https://your-callback-url.com
+              required:
+              - original_video_url
+              - source_audio_url
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lipsync_id:
+                    type: string
+                    description: A unique identifier for the lipsync request.
+                    example: wf85407a7ba9d
+                  lipsync_name:
+                    type: string
+                    nullable: true
+                    description: The name of the lipsync request.
+                    example: My Lipsync Video
+                  status:
+                    type: string
+                    description: The status of the lipsync request.
+                    example: started
+                  callback_url:
+                    type: string
+                    description: The callback URL that will receive notifications about the lipsync request.
+                    example: https://your-callback-url.com
+                  request_id:
+                    type: string
+                    description: Legacy field - will be removed soon. Use lipsync_id instead.
+                    example: wf85407a7ba9d
+                  request_name:
+                    type: string
+                    description: Legacy field - will be removed soon. Use lipsync_name instead.
+                    example: My Lipsync Video
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid original_video_url
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    get:
+      tags:
+      - Lipsync
+      summary: List Lipsyncs
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint returns a list of all Lipsyncs created by the account associated with the API Key in use.
+
+        '
+      operationId: listLipsyncs
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of lipsyncs to return per page. Default is 10.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return. Default is 1.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        lipsync_id:
+                          type: string
+                          description: A unique identifier for the lipsync request.
+                          example: w0108f2d24k2a
+                        lipsync_name:
+                          type: string
+                          description: The name of the lipsync video.
+                          example: My Lipsync Video
+                        status:
+                          type: string
+                          description: The status of the lipsync request. Can be either `started`, `completed`, or `error`.
+                        created_at:
+                          type: string
+                          description: The date and time the lipsync request was created.
+                        video_url:
+                          type: string
+                          description: The URL to download the completed lipsync video.
+                          example: https://lipsync-prod.s3.amazonaws.com/l0108f2d24k2a.mp4
+                        request_id:
+                          type: string
+                          description: Legacy field - will be removed soon. Use lipsync_id instead.
+                          example: w0108f2d24k2a
+                        request_name:
+                          type: string
+                          description: Legacy field - will be removed soon. Use lipsync_name instead.
+                          example: My Lipsync Video
+                  total_count:
+                    type: integer
+                    description: The total number of lipsync videos that fit the query.
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/lipsync/{lipsync_id}:
+    get:
+      tags:
+      - Lipsync
+      summary: Get Lipsync
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint returns a single lipsync by its unique identifier.
+
+        '
+      operationId: getLipsync
+      parameters:
+      - in: path
+        name: lipsync_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the lipsync request.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lipsync_id:
+                    type: string
+                    description: A unique identifier for the lipsync request.
+                    example: w0108f2d24k2a
+                  lipsync_name:
+                    type: string
+                    description: The name of the lipsync video.
+                    example: My Lipsync Video
+                  status:
+                    type: string
+                    description: The status of the lipsync request.
+                  created_at:
+                    type: string
+                    description: The date and time the lipsync request was created.
+                  video_url:
+                    type: string
+                    description: The URL to download the completed lipsync video.
+                    example: https://lipsync-prod.s3.amazonaws.com/l0108f2d24k2a.mp4
+                  request_id:
+                    type: string
+                    description: Legacy field - will be removed soon. Use lipsync_id instead.
+                    example: w0108f2d24k2a
+                  request_name:
+                    type: string
+                    description: Legacy field - will be removed soon. Use lipsync_name instead.
+                    example: My Lipsync Video
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid lipsync_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Lipsync
+      summary: Delete Lipsync
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint deletes a single lipsync by its unique identifier.
+
+        '
+      operationId: deleteLipsync
+      parameters:
+      - in: path
+        name: lipsync_id
+        required: true
+        schema:
+          type: string
+          example: w4ed23359d415
+        description: A unique identifier for the lipsync request.
+      responses:
+        '204':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid lipsync_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

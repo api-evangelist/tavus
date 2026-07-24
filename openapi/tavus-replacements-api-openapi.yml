@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Replacements API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Replacements
+paths:
+  /v2/replacements:
+    post:
+      tags:
+      - Replacements
+      summary: Create Replacement
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint creates a test word replacement request that will modify specific words or phrases in an existing video.
+
+        '
+      operationId: createReplacement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original_video_url:
+                  type: string
+                  description: A direct link to the video that will be modified. This should be a publicly accessible / presigned S3 URL.
+                  example: https://example.com/video.mp4
+                transcription_id:
+                  type: string
+                  example: t0108f2d24k2a
+                  description: A unique identifier for the transcription.
+                new_transcript:
+                  type: string
+                  example: Hello John, I'm excited to show you our new product!
+                  description: The new text that will replace the old text in the video. This should be an edited version of the text returned from the transcription service (referenced by transcription_id). Both the original transcription and this new text are used to identify which words to replace.
+                callback_url:
+                  type: string
+                  description: A url that will receive a callback on completion of the replacement or on error.
+                  example: https://your-callback-url.com
+                replacement_name:
+                  type: string
+                  description: An optional name for the replacement.
+                  example: My First Replacement
+              required:
+              - original_video_url
+              - new_transcript
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  replacement_id:
+                    type: string
+                    example: w0108f2d24k2a
+                    description: A unique identifier for the replacement.
+                  status:
+                    type: string
+                    description: The status of the replacement.
+                  created_at:
+                    type: string
+                    description: The date and time the replacement was created.
+      security:
+      - apiKey: []
+    get:
+      tags:
+      - Replacements
+      summary: List Replacements
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint returns a list of all Replacements created by the account associated with the API Key in use.
+
+        '
+      operationId: listReplacements
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of replacements to return per page. Default is 10.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return. Default is 1.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        replacement_id:
+                          type: string
+                          description: A unique identifier for the replacement.
+                          example: w0108f2d24k2a
+                        replacement_name:
+                          type: string
+                          description: The name of the replacement.
+                          example: My First Replacement
+                        status:
+                          type: string
+                          description: The status of the replacement. Can be either `started`, `completed`, or `error`.
+                        created_at:
+                          type: string
+                          description: The date and time the replacement was created.
+                  total_count:
+                    type: integer
+                    description: The total number of replacements that fit the query.
+      security:
+      - apiKey: []
+  /v2/replacements/{replacement_id}:
+    get:
+      tags:
+      - Replacements
+      summary: Get Replacement
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint returns a single replacement by its unique identifier.
+
+        '
+      operationId: getReplacement
+      parameters:
+      - in: path
+        name: replacement_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the replacement.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  replacement_id:
+                    type: string
+                    example: w0108f2d24k2a
+                    description: A unique identifier for the replacement.
+                  replacement_name:
+                    type: string
+                    description: The name of the replacement.
+                  status:
+                    type: string
+                    description: The status of the replacement.
+                  created_at:
+                    type: string
+                    description: The date and time the replacement was created.
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Replacements
+      summary: Delete Replacement
+      deprecated: true
+      description: 'This endpoint is no longer supported by Tavus.
+
+
+        This endpoint deletes a single replacement by its unique identifier.
+
+        '
+      operationId: deleteReplacement
+      parameters:
+      - in: path
+        name: replacement_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the replacement.
+      responses:
+        '204':
+          description: ''
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

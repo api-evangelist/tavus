@@ -1,0 +1,458 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Replicas API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Replicas
+paths:
+  /v2/replicas:
+    get:
+      tags:
+      - Replicas
+      summary: List Replicas
+      description: 'This endpoint returns a list of all Replicas created by the account associated with the API Key in use.
+
+        '
+      operationId: listReplicas
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of replicas to return per page.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return
+      - in: query
+        name: verbose
+        schema:
+          type: boolean
+        description: If set to true, the response will include additional replica data such as the replica type.
+      - in: query
+        name: replica_type
+        schema:
+          type: string
+          enum:
+          - user
+          - system
+        description: If set to user, the response will only include user replicas. If set to system, the response will only include stock replicas.
+      - in: query
+        name: replica_ids
+        schema:
+          type: string
+        description: 'A comma separated list of replica ids to filter the response by. Example: `replica_ids=r90bbd427f71`'
+      - in: query
+        name: model_name
+        schema:
+          type: string
+        description: Filter the list to replicas trained on a specific Phoenix model (e.g. `phoenix-3`, `phoenix-4`).
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Replicas for the current page; use `total_count` for the full count under the applied filters.
+                    items:
+                      type: object
+                      properties:
+                        replica_id:
+                          type: string
+                          example: r90bbd427f71
+                          description: A unique identifier for the replica.
+                        replica_name:
+                          type: string
+                          example: My Replica
+                          description: The name of the replica.
+                        thumbnail_video_url:
+                          type: string
+                          description: A direct link to the video that will be used as the thumbnail for the replica.
+                        training_progress:
+                          type: string
+                          example: 100/100
+                          description: Training progress as a string (for example `100/100`).
+                        status:
+                          type: string
+                          example: completed
+                          description: 'Training lifecycle: `started`, `completed`, or `error`.'
+                        created_at:
+                          type: string
+                        replica_type:
+                          type: string
+                          example: user'
+                          description: 'If `verbose` query paramter is set to true. The type of replica. Possible values: user, system. User replicas are replicas that have been created by users. System replicas are stock Tavus replicas that anyone may use'
+                        model_name:
+                          type: string
+                          example: phoenix-3
+                          description: The Phoenix model the replica was trained on (e.g. `phoenix-3`, `phoenix-4`).
+                  total_count:
+                    type: integer
+                    description: The total number of replicas given the filters provided.
+                    example: 42
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    post:
+      tags:
+      - Replicas
+      summary: Create Replica
+      description: Creates a new replica from a training video or image URL for use in conversations—see [Which training path?](/sections/replica/which-training-path) for preparation, consent, and media requirements.
+      operationId: createReplica
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consent_video_url:
+                  type: string
+                  description: 'Optional direct link to a **separate** video that contains only the consent statement when it is not spoken at the start of `train_video_url`.
+
+
+                    **Required** when your flow uses a standalone consent recording alongside `train_video_url` for likeness-based training from video. See [Training from a video](/sections/replica/train-with-a-video) and [consent statement requirements](/sections/troubleshooting/consent-statement) for exact wording and troubleshooting.
+
+
+                    If omitted, the opening of `train_video_url` must include the consent statement instead (see `train_video_url`).
+
+                    '
+                  example: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-consent-video.mp4
+                train_video_url:
+                  type: string
+                  description: 'A direct download link such as a **presigned S3 URL** or other publicly reachable file used for video-based replica training. Do not send `train_image_url` in the same request.
+
+
+                    The file must meet [training video requirements](/sections/troubleshooting/training-video-size).
+
+
+                    When you **do not** send `consent_video_url`, this training clip **must** open with the following statement (verbatim), or training will fail:
+
+
+                    > I, [FULL NAME], am currently speaking and consent Tavus to create an AI clone of me by using the audio and video samples I provide. I understand that this AI clone can be used to create videos that look and sound like me.
+
+
+                    See [consent statement requirements](/sections/troubleshooting/consent-statement) for formatting tips and troubleshooting.
+
+                    '
+                  example: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-video.mp4
+                train_image_url:
+                  type: string
+                  description: A direct link to a publicly accessible image used for image-to-replica training. Requires `voice_name`. Do not send `train_video_url` in the same request. See [Training from an image](/sections/replica/train-with-an-image) for image training, voice selection, and consent.
+                  example: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-image.png
+                voice_name:
+                  type: string
+                  description: Required when `train_image_url` is set. Slug that selects the voice from an existing Tavus stock replica (case-insensitive, e.g. `anna`). If supplied with `train_video_url`, the name is still validated when present. Use [List Voices](/api-reference/voices/list-voices) to discover valid slugs; see also [example `voice_name` values](/sections/replica/train-with-an-image#example-voice-name-table).
+                  example: anna
+                auto_fix_training_image:
+                  type: boolean
+                  description: When set to `true`, Tavus's AI Image Fixer instantly fixes any uploaded image to fit our [image requirements](/sections/replica/train-with-an-image#image-requirements), eliminating the need for editing or recapturing photos. Only applies to image-based training (`train_image_url`).
+                  example: true
+                callback_url:
+                  type: string
+                  description: A url that will receive a callback on completion of replica training or on error.
+                  example: https://yourwebsite.com/webhook
+                replica_name:
+                  type: string
+                  description: A name for the replica.
+                  example: Rio
+                model_name:
+                  type: string
+                  description: The Phoenix model version used to train the replica. Defaults to `phoenix-4`; set to `phoenix-3` for the older model.
+                  example: phoenix-4
+                properties:
+                  type: object
+                  properties:
+                    background_green_screen:
+                      type: boolean
+                      description: If set to true, the replica will have a green screen background.
+                      example: false
+            examples:
+              Video with consent videos:
+                value:
+                  callback_url: https://yourwebsite.com/webhook
+                  replica_name: Rio
+                  train_video_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-video.mp4
+                  consent_video_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-consent-video.mp4
+              Non-Human Replica:
+                value:
+                  callback_url: https://yourwebsite.com/webhook
+                  replica_name: AI
+                  train_video_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-video.mp4
+              Older Model Replica:
+                value:
+                  model_name: phoenix-3
+                  callback_url: https://yourwebsite.com/webhook
+                  replica_name: My phoenix-3 Replica
+                  train_video_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-video.mp4
+                  consent_video_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-consent-video.mp4
+              Image to Replica:
+                value:
+                  callback_url: https://yourwebsite.com/webhook
+                  replica_name: Image Replica
+                  train_image_url: https://my-example-bucket.s3.us-east-1.amazonaws.com/your-train-image.png
+                  voice_name: anna
+                  auto_fix_training_image: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  replica_id:
+                    type: string
+                    example: r90bbd427f71
+                    description: A unique identifier for the replica.
+                  status:
+                    type: string
+                    example: started
+                    description: 'The status of the replica. Possible values: `started`, `completed`, `error`.'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Either train_video_url or train_image_url must be provided.
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/replicas/{replica_id}:
+    get:
+      tags:
+      - Replicas
+      summary: Get Replica
+      description: 'This endpoint returns a single Replica by its unique identifier.
+
+        '
+      operationId: getReplica
+      parameters:
+      - in: path
+        name: replica_id
+        required: true
+        schema:
+          type: string
+        description: A unique identifier for the replica.
+      - in: query
+        name: verbose
+        schema:
+          type: boolean
+        description: If set to true, the response will include additional replica data such as replica_type.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  replica_id:
+                    type: string
+                    example: r90bbd427f71
+                    description: A unique identifier for the replica.
+                  replica_name:
+                    type: string
+                    example: My Replica
+                    description: The name of the replica.
+                  thumbnail_video_url:
+                    type: string
+                    description: A direct link to the video that will be used as the thumbnail for the replica.
+                  training_progress:
+                    type: string
+                    example: 100/100
+                    description: Training progress as a string (for example `100/100`).
+                  status:
+                    type: string
+                    example: completed
+                    description: 'Training lifecycle: `started`, `completed`, or `error`. On failure, this is `error` and `error_message` is populated.'
+                  created_at:
+                    type: string
+                    example: '2024-01-24T07:14:03.327Z'
+                    description: The date and time the replica was created.
+                  updated_at:
+                    type: string
+                    example: '2024-01-24T07:14:03.327Z'
+                    description: The date and time of when the replica was last updated.
+                  error_message:
+                    type: string
+                    nullable: true
+                    description: When `status` is `error`, contains details about the training failure; otherwise typically null.
+                  replica_type:
+                    type: string
+                    example: user'
+                    description: 'If `verbose` query paramter is set to true. The type of replica. Possible values: user, system. User replicas are replicas that have been created by users. System replicas are stock Tavus replicas that anyone may use'
+                  model_name:
+                    type: string
+                    example: phoenix-3
+                    description: The Phoenix model the replica was trained on (e.g. `phoenix-3`, `phoenix-4`).
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid replica_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Replicas
+      summary: Delete Replica
+      description: Deletes a Replica by its unique ID; deleted replicas cannot be used in a conversation.
+      operationId: deleteReplica
+      parameters:
+      - name: replica_id
+        in: path
+        required: true
+        description: The unique identifier of the replica.
+        schema:
+          type: string
+          example: r90bbd427f71
+      - name: hard
+        in: query
+        schema:
+          type: boolean
+          example: false
+        description: 'If set to true, the replica and associated assets (such as training footage) will be hard deleted. CAUTION: This action is irrevocable. Note that a hard delete of a replica does *not* delete the conversation created using said replica. See [Delete Video](https://docs.tavus.io/api-reference/video-request/delete-video) for more info.'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid replica_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/replicas/{replica_id}/name:
+    parameters:
+    - name: replica_id
+      in: path
+      required: true
+      description: The unique identifier of the replica.
+      schema:
+        type: string
+        example: r90bbd427f71
+    patch:
+      tags:
+      - Replicas
+      summary: Rename Replica
+      description: 'This endpoint renames a single Replica by its unique identifier.
+
+        '
+      operationId: renameReplica
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replica_name:
+                  type: string
+                  example: Rio
+              required:
+              - replica_name
+            examples:
+              Rename Replica:
+                value:
+                  replica_name: Rio
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid replica_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

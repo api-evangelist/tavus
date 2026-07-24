@@ -1,0 +1,967 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Documents API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Documents
+paths:
+  /v2/documents:
+    post:
+      tags:
+      - Documents
+      summary: Create Document
+      description: Upload documents to your knowledge base for personas to reference during conversations.
+      operationId: createDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document_url:
+                  type: string
+                  description: 'Direct URL to a file or a website for your [Knowledge Base](/sections/conversational-video-interface/knowledge-base). Submitting this URL starts processing **asynchronously**; the document can be used in conversations once processing completes, which may take **a few minutes** depending on file size.
+
+
+                    <Note>
+
+                    For now, our Knowledge Base only supports documents written in English and works best for conversations in English. We will be expanding our Knowledge Base language support soon.
+
+                    </Note>
+
+
+                    Maximum file size **50MB**. Supported file formats: `.pdf`, `.txt`, `.docx`, `.doc`, `.png`, `.jpg`, `.pptx`, `.csv`, and `.xlsx`. Website URLs are supported: a snapshot of the page is processed into document content; use the `crawl` object for multi-page crawling from a starting URL.
+
+                    '
+                  example: https://docs.example.com/
+                document_name:
+                  type: string
+                  description: Optional name for the document. If not provided, a default name will be generated.
+                  example: Example Docs
+                callback_url:
+                  type: string
+                  description: Optional URL that receives status updates while the document processes asynchronously (e.g. started, processing, ready, error).
+                  example: https://your-server.com/webhook
+                tags:
+                  type: array
+                  description: 'Optional tags to categorize the document for management and for use with document-based access in conversations. After the document is ready, attach it via `document_ids` on [Create Persona](/api-reference/personas/create-persona) or [Create Conversation](/api-reference/conversations/create-conversation).
+
+                    '
+                  items:
+                    type: string
+                  example:
+                  - docs
+                  - website
+                crawl:
+                  type: object
+                  description: 'Optional configuration for website crawling. When provided with a website URL, the system follows links from the starting URL and processes multiple pages into a single document. Without this parameter, only the single page at the URL is scraped.
+
+
+                    **Rate limits:** at most **100** crawl documents per user, at most **5** concurrent crawls at any time, and a **1-hour cooldown** between recrawls of the same document.
+
+
+                    To fetch fresh content after a crawled document exists, use [Recrawl Document](/api-reference/documents/recrawl-document).
+
+                    '
+                  properties:
+                    depth:
+                      type: integer
+                      description: How many levels deep to follow links from the starting URL (1-10). A depth of 1 means only pages directly linked from the starting URL.
+                      minimum: 1
+                      maximum: 10
+                      example: 2
+                    max_pages:
+                      type: integer
+                      description: Maximum number of pages to crawl (1-100). Processing stops once this limit is reached.
+                      minimum: 1
+                      maximum: 100
+                      example: 10
+              required:
+              - document_url
+            examples:
+              minimal:
+                summary: Required fields only
+                value:
+                  document_url: https://docs.example.com/
+              with_crawl:
+                summary: Website with multi-page crawl
+                value:
+                  document_name: Company Knowledge Base
+                  document_url: https://docs.example.com/
+                  crawl:
+                    depth: 2
+                    max_pages: 20
+                  callback_url: https://your-server.com/webhook
+      responses:
+        '200':
+          description: Document created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                    description: Unique identifier for the created document
+                    example: d8-5c71baca86fc
+                  document_name:
+                    type: string
+                    description: Name of the document
+                    example: Example Docs
+                  document_url:
+                    type: string
+                    description: URL of the document or website
+                    example: https://docs.example.com/
+                  status:
+                    type: string
+                    description: 'Current status of the document processing. Possible values: `started`, `processing`, `ready`, `error`, `recrawling`.'
+                    enum:
+                    - started
+                    - processing
+                    - ready
+                    - error
+                    - recrawling
+                    example: started
+                  progress:
+                    type: integer
+                    nullable: true
+                    description: Processing progress as a percentage (0-100). Null when processing has not started or is complete.
+                    example: null
+                  error_message:
+                    type: string
+                    nullable: true
+                    description: 'Error code indicating why processing failed. Only present when status is `error`. Possible values include: `file_download_failed`, `file_format_unsupported`, `file_size_too_large`, `file_empty`, `invalid_file_url`, `document_processing_failed`, `website_processing_failed`, `chunking_failed`, `embedding_failed`, `vector_store_failed`, `contact_support`.'
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was created
+                    example: '2024-01-01T12:00:00Z'
+                  updated_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was last updated
+                    example: '2024-01-01T12:00:00Z'
+                  callback_url:
+                    type: string
+                    description: URL that will receive status updates
+                    example: https://your-server.com/webhook
+                  tags:
+                    type: array
+                    description: Array of document tags
+                    items:
+                      type: string
+                    example:
+                    - docs
+                    - website
+                  crawl_config:
+                    type: object
+                    nullable: true
+                    description: The crawl configuration used for this document (only present for crawled websites)
+                    properties:
+                      depth:
+                        type: integer
+                        description: Crawl depth setting
+                        example: 2
+                      max_pages:
+                        type: integer
+                        description: Maximum pages setting
+                        example: 10
+                  crawled_urls:
+                    type: array
+                    nullable: true
+                    description: List of URLs that were crawled (only present for crawled websites after processing completes)
+                    items:
+                      type: string
+                    example:
+                    - https://docs.example.com/
+                    - https://docs.example.com/getting-started
+                    - https://docs.example.com/api
+                  last_crawled_at:
+                    type: string
+                    nullable: true
+                    description: ISO 8601 timestamp of when the document was last crawled
+                    example: '2024-01-01T12:00:00Z'
+                  crawl_count:
+                    type: integer
+                    nullable: true
+                    description: Number of times the document has been crawled
+                    example: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: 'Invalid request: document_url is required'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+        '429':
+          description: Too Many Requests - Crawl rate limit exceeded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: Crawl document limit reached (100). Contact support@tavus.io to increase your limit.
+      security:
+      - apiKey: []
+    get:
+      tags:
+      - Documents
+      summary: List Documents
+      description: 'Retrieve a list of documents.
+
+        '
+      operationId: listDocuments
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: 'Number of documents to return per page (default: 10)'
+        example: 10
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: 'Page number for pagination (0-based, default: 0)'
+        example: 0
+      - in: query
+        name: sort
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+        description: 'Sort direction for the results (default: ascending)'
+        example: ascending
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: Filter documents by status
+      - in: query
+        name: name_or_uuid
+        schema:
+          type: string
+        description: Search for documents by name or UUID
+      - in: query
+        name: tags
+        schema:
+          type: string
+        description: Comma-separated list of tags to filter by
+        example: important,meeting
+      responses:
+        '200':
+          description: List of documents
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Documents for the current page; use `total_count` for the full count under the applied filters.
+                    items:
+                      type: object
+                      properties:
+                        document_id:
+                          type: string
+                          description: Unique identifier for the document
+                          example: d8-5c71baca86fc
+                        document_name:
+                          type: string
+                          description: Name of the document
+                          example: Example Docs
+                        document_url:
+                          type: string
+                          description: URL of the document
+                          example: https://docs.example.com/
+                        status:
+                          type: string
+                          description: 'Current status of the document processing. Possible values: `started`, `processing`, `ready`, `error`, `recrawling`.'
+                          enum:
+                          - started
+                          - processing
+                          - ready
+                          - error
+                          - recrawling
+                          example: ready
+                        progress:
+                          type: integer
+                          nullable: true
+                          description: Processing progress as a percentage (0-100). Null when processing has not started or is complete.
+                          example: null
+                        error_message:
+                          type: string
+                          nullable: true
+                          description: 'Error code indicating why processing failed. Only present when status is `error`. Possible values include: `file_download_failed`, `file_format_unsupported`, `file_size_too_large`, `file_empty`, `invalid_file_url`, `document_processing_failed`, `website_processing_failed`, `chunking_failed`, `embedding_failed`, `vector_store_failed`, `contact_support`.'
+                        created_at:
+                          type: string
+                          description: ISO 8601 timestamp of when the document was created
+                          example: '2024-01-01T12:00:00Z'
+                        updated_at:
+                          type: string
+                          description: ISO 8601 timestamp of when the document was last updated
+                          example: '2024-01-01T12:05:00Z'
+                        callback_url:
+                          type: string
+                          description: URL that receives status updates
+                          example: https://your-server.com/webhook
+                        tags:
+                          type: array
+                          description: Array of document tags
+                          items:
+                            type: string
+                          example:
+                          - docs
+                          - website
+                        crawl_config:
+                          type: object
+                          nullable: true
+                          description: The crawl configuration used for this document (only present for crawled websites)
+                          properties:
+                            depth:
+                              type: integer
+                              description: Crawl depth setting
+                              example: 2
+                            max_pages:
+                              type: integer
+                              description: Maximum pages setting
+                              example: 10
+                        crawled_urls:
+                          type: array
+                          nullable: true
+                          description: List of URLs that were crawled (only present for crawled websites after processing completes)
+                          items:
+                            type: string
+                          example:
+                          - https://docs.example.com/
+                          - https://docs.example.com/getting-started
+                        last_crawled_at:
+                          type: string
+                          nullable: true
+                          description: ISO 8601 timestamp of when the document was last crawled
+                          example: '2024-01-01T12:00:00Z'
+                        crawl_count:
+                          type: integer
+                          nullable: true
+                          description: Number of times the document has been crawled
+                          example: 1
+                  total_count:
+                    type: integer
+                    description: Total number of documents matching the filter criteria
+                    example: 42
+                  page:
+                    type: integer
+                    description: Current page number
+                    example: 0
+                  limit:
+                    type: integer
+                    description: Number of documents per page
+                    example: 10
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: 'Invalid request: limit must be a positive integer'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/documents/{document_id}:
+    get:
+      tags:
+      - Documents
+      summary: Get Document
+      description: 'Retrieve detailed information about a specific document using its unique identifier.
+
+        '
+      operationId: getDocument
+      parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the document to retrieve
+        example: d8-5c71baca86fc
+      x-codeSamples:
+      - lang: curl
+        source: "curl https://tavusapi.com/v2/documents/{document_id} \\\n  -H \"x-api-key: YOUR_API_KEY\"\n"
+      - lang: Python
+        source: "import requests\n\nheaders = {\n    \"x-api-key\": \"YOUR_API_KEY\"\n}\n\nresponse = requests.get(\n    \"https://tavusapi.com/v2/documents/{document_id}\",\n    headers=headers\n)\n"
+      - lang: JavaScript
+        source: "const response = await fetch(\n  \"https://tavusapi.com/v2/documents/{document_id}\",\n  {\n    headers: {\n      \"x-api-key\": \"YOUR_API_KEY\"\n    }\n  }\n);\n"
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                    description: Unique identifier for the document
+                    example: d8-5c71baca86fc
+                  document_name:
+                    type: string
+                    description: Name of the document
+                    example: Example Docs
+                  document_url:
+                    type: string
+                    description: URL of the document
+                    example: https://docs.example.com/
+                  status:
+                    type: string
+                    description: 'Current status of the document processing. Possible values: `started`, `processing`, `ready`, `error`, `recrawling`.'
+                    enum:
+                    - started
+                    - processing
+                    - ready
+                    - error
+                    - recrawling
+                    example: ready
+                  progress:
+                    type: integer
+                    nullable: true
+                    description: Processing progress as a percentage (0-100). Null when processing has not started or is complete.
+                    example: null
+                  error_message:
+                    type: string
+                    nullable: true
+                    description: 'Error code indicating why processing failed. Only present when status is `error`. Possible values include: `file_download_failed`, `file_format_unsupported`, `file_size_too_large`, `file_empty`, `invalid_file_url`, `document_processing_failed`, `website_processing_failed`, `chunking_failed`, `embedding_failed`, `vector_store_failed`, `contact_support`.'
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was created
+                    example: '2024-01-01T12:00:00Z'
+                  updated_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was last updated
+                    example: '2024-01-01T12:05:00Z'
+                  callback_url:
+                    type: string
+                    description: URL that receives status updates
+                    example: https://your-server.com/webhook
+                  tags:
+                    type: array
+                    description: Array of document tags
+                    items:
+                      type: string
+                    example:
+                    - docs
+                    - website
+                  crawl_config:
+                    type: object
+                    nullable: true
+                    description: The crawl configuration used for this document (only present for crawled websites)
+                    properties:
+                      depth:
+                        type: integer
+                        description: Crawl depth setting
+                        example: 2
+                      max_pages:
+                        type: integer
+                        description: Maximum pages setting
+                        example: 10
+                  crawled_urls:
+                    type: array
+                    nullable: true
+                    description: List of URLs that were crawled (only present for crawled websites after processing completes)
+                    items:
+                      type: string
+                    example:
+                    - https://docs.example.com/
+                    - https://docs.example.com/getting-started
+                    - https://docs.example.com/api
+                  last_crawled_at:
+                    type: string
+                    nullable: true
+                    description: ISO 8601 timestamp of when the document was last crawled
+                    example: '2024-01-01T12:00:00Z'
+                  crawl_count:
+                    type: integer
+                    nullable: true
+                    description: Number of times the document has been crawled
+                    example: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Document not found
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Documents
+      summary: Delete Document
+      description: 'Delete a document and its associated data using its unique identifier.
+
+        '
+      operationId: deleteDocument
+      parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the document to delete
+      responses:
+        '204':
+          description: NO CONTENT - Document deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Document not found
+      security:
+      - apiKey: []
+    patch:
+      tags:
+      - Documents
+      summary: Update Document
+      description: Update a document's `document_name` and `tags`.
+      operationId: patchDocument
+      parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the document to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document_name:
+                  type: string
+                  description: New name for the document
+                  example: Updated Document Name
+                tags:
+                  type: array
+                  description: New array of tags for the document. This will overwrite the existing tags for the document.
+                  items:
+                    type: string
+                  example:
+                  - docs
+                  - website
+                  - updated
+      responses:
+        '200':
+          description: Document updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                    description: Unique identifier for the document
+                    example: d8-5c71baca86fc
+                  document_name:
+                    type: string
+                    description: Updated name of the document
+                    example: Updated Document Name
+                  document_url:
+                    type: string
+                    description: URL of the document
+                    example: https://docs.example.com/
+                  status:
+                    type: string
+                    description: 'Current status of the document processing. Possible values: `started`, `processing`, `ready`, `error`, `recrawling`.'
+                    enum:
+                    - started
+                    - processing
+                    - ready
+                    - error
+                    - recrawling
+                    example: ready
+                  progress:
+                    type: integer
+                    nullable: true
+                    description: Processing progress as a percentage (0-100). Null when processing has not started or is complete.
+                    example: null
+                  error_message:
+                    type: string
+                    nullable: true
+                    description: 'Error code indicating why processing failed. Only present when status is `error`. Possible values include: `file_download_failed`, `file_format_unsupported`, `file_size_too_large`, `file_empty`, `invalid_file_url`, `document_processing_failed`, `website_processing_failed`, `chunking_failed`, `embedding_failed`, `vector_store_failed`, `contact_support`.'
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was created
+                    example: '2024-01-01T12:00:00Z'
+                  updated_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was last updated
+                    example: '2024-01-01T13:00:00Z'
+                  callback_url:
+                    type: string
+                    description: URL that receives status updates
+                    example: https://your-server.com/webhook
+                  tags:
+                    type: array
+                    description: Updated array of document tags
+                    items:
+                      type: string
+                    example:
+                    - docs
+                    - website
+                    - updated
+                  crawl_config:
+                    type: object
+                    nullable: true
+                    description: The crawl configuration used for this document (only present for crawled websites)
+                    properties:
+                      depth:
+                        type: integer
+                        description: Crawl depth setting
+                        example: 2
+                      max_pages:
+                        type: integer
+                        description: Maximum pages setting
+                        example: 10
+                  crawled_urls:
+                    type: array
+                    nullable: true
+                    description: List of URLs that were crawled (only present for crawled websites after processing completes)
+                    items:
+                      type: string
+                    example:
+                    - https://docs.example.com/
+                    - https://docs.example.com/getting-started
+                    - https://docs.example.com/api
+                  last_crawled_at:
+                    type: string
+                    nullable: true
+                    description: ISO 8601 timestamp of when the document was last crawled
+                    example: '2024-01-01T12:00:00Z'
+                  crawl_count:
+                    type: integer
+                    nullable: true
+                    description: Number of times the document has been crawled
+                    example: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: 'Invalid request: document_name must be a string'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Document not found
+      security:
+      - apiKey: []
+  /v2/documents/{document_id}/recrawl:
+    post:
+      tags:
+      - Documents
+      summary: Recrawl Document
+      description: Trigger a recrawl of a website document to fetch fresh content.
+      operationId: recrawlDocument
+      parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+        description: 'Unique id of the crawl-backed **website** document to refresh. Use when the source site changed, you want to refresh content on a schedule, or retry after crawl or processing errors.
+
+
+          The document must be in **`ready`** or **`error`** (otherwise `409`). It must have been created with a `crawl` configuration unless you supply `crawl` in the request body for this call.
+
+
+          The same document cannot be recrawled more than once within each **1-hour** cooldown (`429` if invoked too soon).
+
+          '
+        example: d8-5c71baca86fc
+      requestBody:
+        required: false
+        description: 'Optional body. Omit entirely to reuse the crawl `depth` / `max_pages` stored from document creation, or include `crawl` to override those values for this run only.
+
+
+          After **`202`**, status is typically **`recrawling`** until processing finishes. If you set `callback_url` when [creating the document](/api-reference/documents/create-document), webhooks report progress until the document returns to **`ready`** or **`error`**.
+
+
+          Poll [Get Document](/api-reference/documents/get-document) for current status, `crawl_count`, and `last_crawled_at`.
+
+
+          **Account limits:** at most **5** concurrent crawls per user and at most **100** crawl-backed documents per user.
+
+          '
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                crawl:
+                  type: object
+                  description: 'Optional `depth` and `max_pages` for **this recrawl only**; overrides stored crawl settings from document creation when provided. If omitted, the original crawl configuration is used.
+
+
+                    **What runs:** the same starting URL as the original crawl, links followed within these limits, fresh page content processed, existing vectors replaced when processing completes, and `crawl_count` / `last_crawled_at` updated (see the `202` payload and Get Document while status is `recrawling`).
+
+                    '
+                  properties:
+                    depth:
+                      type: integer
+                      description: How many levels deep to follow links from the starting URL (1-10). A depth of 1 means only pages directly linked from the starting URL.
+                      minimum: 1
+                      maximum: 10
+                      example: 2
+                    max_pages:
+                      type: integer
+                      description: Maximum number of pages to crawl (1-100). Processing stops once this limit is reached.
+                      minimum: 1
+                      maximum: 100
+                      example: 10
+            examples:
+              override_crawl:
+                summary: Override crawl settings for this recrawl
+                value:
+                  crawl:
+                    depth: 3
+                    max_pages: 50
+      responses:
+        '202':
+          description: Recrawl initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  document_id:
+                    type: string
+                    description: Unique identifier for the document
+                    example: d8-5c71baca86fc
+                  document_name:
+                    type: string
+                    description: Name of the document
+                    example: Company Website
+                  document_url:
+                    type: string
+                    description: URL of the document
+                    example: https://example.com/
+                  status:
+                    type: string
+                    description: 'After a successful recrawl request, typically **`recrawling`** until processing completes, then **`ready`** or **`error`**. Other values: `started`, `processing`.'
+                    enum:
+                    - started
+                    - processing
+                    - ready
+                    - error
+                    - recrawling
+                    example: recrawling
+                  progress:
+                    type: integer
+                    nullable: true
+                    description: Processing progress as a percentage (0-100). Null when processing has not started or is complete.
+                    example: null
+                  error_message:
+                    type: string
+                    nullable: true
+                    description: 'Error code indicating why processing failed. Only present when status is `error`. Possible values include: `file_download_failed`, `file_format_unsupported`, `file_size_too_large`, `file_empty`, `invalid_file_url`, `document_processing_failed`, `website_processing_failed`, `chunking_failed`, `embedding_failed`, `vector_store_failed`, `contact_support`.'
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was created
+                    example: '2024-01-01T12:00:00Z'
+                  updated_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the document was last updated
+                    example: '2024-01-15T10:30:00Z'
+                  callback_url:
+                    type: string
+                    description: If set on [Create Document](/api-reference/documents/create-document), Tavus POSTs status updates here while this recrawl runs through completion.
+                    example: https://your-server.com/webhook
+                  tags:
+                    type: array
+                    description: Array of document tags
+                    items:
+                      type: string
+                    example:
+                    - website
+                    - company
+                  crawl_config:
+                    type: object
+                    description: The crawl configuration being used for the recrawl
+                    properties:
+                      depth:
+                        type: integer
+                        example: 2
+                      max_pages:
+                        type: integer
+                        example: 10
+                  crawled_urls:
+                    type: array
+                    nullable: true
+                    description: List of URLs from the previous crawl (will be updated when recrawl completes)
+                    items:
+                      type: string
+                    example:
+                    - https://docs.example.com/
+                    - https://docs.example.com/getting-started
+                  last_crawled_at:
+                    type: string
+                    nullable: true
+                    description: ISO 8601 timestamp of the previous crawl
+                    example: '2024-01-01T12:05:00Z'
+                  crawl_count:
+                    type: integer
+                    description: Number of times the document has been crawled (will increment when recrawl completes)
+                    example: 1
+        '400':
+          description: Bad Request - Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: Document was not created with crawl configuration
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message
+                    example: Document not found
+        '409':
+          description: Conflict - Document state prevents recrawl
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: 'Document must be in ''ready'' or ''error'' state to recrawl, current status: processing'
+        '429':
+          description: Too Many Requests - Rate limit exceeded or cooldown period
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message
+                    example: 'Recrawl cooldown: please wait 45 minutes before recrawling this document.'
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

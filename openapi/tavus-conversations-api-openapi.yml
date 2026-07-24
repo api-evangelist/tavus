@@ -1,0 +1,718 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Conversations
+paths:
+  /v2/conversations:
+    post:
+      tags:
+      - Conversations
+      description: 'This endpoint starts a real-time video conversation with your AI replica, powered by a persona that allows it to see, hear, and respond like a human.
+
+        '
+      operationId: createConversation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replica_id:
+                  type: string
+                  description: The unique identifier for the replica that will join the conversation. **Each request must have a valid `replica_id` value that's either directly passed in or as part of a persona**.
+                  example: r90bbd427f71
+                persona_id:
+                  type: string
+                  description: 'The unique identifier for the persona that the replica will use in the conversation.
+
+
+                    - **If your Persona does not have a valid `replica_id`, you must define the `replica_id` field.**
+
+                    - **If your Persona already has a valid `replica_id` and you provide one in the request, the `replica_id` provided in the request will be used instead of the one defined in your persona**.
+
+                    '
+                  example: pcb7a34da5fe
+                audio_only:
+                  type: boolean
+                  description: Specifies whether the interaction should be voice-only. **This field is required if you want to create an audio-only conversation**.
+                  example: 'false'
+                callback_url:
+                  type: string
+                  description: A url that will receive webhooks with updates regarding the conversation state.
+                  example: https://yourwebsite.com/webhook
+                conversation_name:
+                  type: string
+                  description: A name for the conversation.
+                  example: Improve Sales Technique
+                conversational_context:
+                  type: string
+                  description: Optional context that will be appended to any context provided in the persona, if one is provided.
+                  example: I want to improve my sales techniques. Help me practice handling common objections from clients and closing deals more effectively.
+                custom_greeting:
+                  type: string
+                  description: An optional custom greeting that the replica will give once a participant joines the conversation.
+                  example: Hey there!
+                memory_stores:
+                  type: array
+                  items:
+                    type: string
+                  description: The memory stores to use for the conversation. The persona will have access to the existing memories in the store and will add newly made memories to the store as well. In most use cases, you will only need to pass in a single memory store.
+                  example:
+                  - anna
+                document_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: The ids of the documents that the persona will be able to access during the conversation. The `document_ids` are returned during the document creation process in the response of the [Get Document](/api-reference/documents/get-document) and the [Create Document](/api-reference/documents/create-document) endpoints.
+                  example:
+                  - doc_1234567890
+                document_retrieval_strategy:
+                  type: string
+                  description: 'The strategy to use for document retrieval. Possible values: `speed`, `quality`, `balanced`. Default is `balanced`.'
+                  example: balanced
+                document_tags:
+                  type: array
+                  items:
+                    type: string
+                  description: The tags of the documents that the replica will be able to access during the conversation. The tags are passed in the `document_tags` parameter of the [Create Document](/api-reference/documents/create-document) endpoint. The document tags do not have to be created explicitly, it is enough to pass in the tags during the document creation process.
+                  example:
+                  - sales
+                  - marketing
+                test_mode:
+                  type: boolean
+                  description: If true, the conversation will be created but the replica will not join the call. This can be used for testing the conversation creation process without incurring any costs. Additionally, the conversation will be created with a status `ended` so it does not affect concurrency limits.
+                  example: false
+                require_auth:
+                  type: boolean
+                  description: If true, creates a private room requiring authentication. A `meeting_token` will be returned in the response that must be used to join the conversation. Without a valid token, users will see 'You are not allowed to join this meeting.'
+                  example: false
+                max_participants:
+                  type: integer
+                  minimum: 2
+                  description: Maximum number of participants allowed in the conversation room. Must be at least 2 (the replica counts as one participant).
+                  example: 2
+                properties:
+                  type: object
+                  description: Optional properties that can be used to customize the conversation.
+                  properties:
+                    max_call_duration:
+                      type: integer
+                      description: The maximum duration of the call in seconds. The default max_call_duration is 3600 seconds (1 hour). Once the time limit specified by this parameter has been reached, the conversation will automatically shut down.
+                      example: 3600
+                    participant_left_timeout:
+                      type: integer
+                      description: The duration in seconds after which the call will be automatically shut down once the last participant leaves.
+                      example: 60
+                    participant_absent_timeout:
+                      type: integer
+                      description: Starting from conversation creation, the duration in seconds after which the call will be automatically shut down if no participant joins the call. Default is 300 seconds (5 minutes).
+                      example: 300
+                    enable_recording:
+                      type: boolean
+                      description: If true, the user will be able to record the conversation. You can find more instructions on recording [here](/sections/conversational-video-interface/quickstart/conversation-recordings#conversation-recordings).
+                      example: true
+                    enable_closed_captions:
+                      type: boolean
+                      description: If true, the user will be able to display closed captions (subtitles) during the conversation. You can find more instructions on displaying closed captions if you are using your custom DailyJS components [here](https://docs.daily.co/reference/daily-js/events/transcription-events#transcription-message). You need to have an [event listener](https://docs.daily.co/reference/daily-js/events) on Daily that listens for app-messages.
+                      example: true
+                    apply_greenscreen:
+                      type: boolean
+                      description: 'If true, the background will be replaced with a greenscreen (RGB values: [0, 255, 155]). You can use WebGL on the frontend to make the greenscreen transparent or change its color.'
+                      example: true
+                    require_auth:
+                      type: boolean
+                      description: If true, participants must authenticate before joining the conversation. More info on private rooms [here](/sections/conversational-video-interface/conversation/customizations/private-rooms).
+                      example: false
+                    language:
+                      type: string
+                      description: The language of the conversation. Please provide the FULL language name, not the two letter code, or specify `multilingual` for automatic language detection. When set to `multilingual`, CVI will use STT language detection to identify the user's spoken language and respond accordingly. If you are using your own TTS voice, please ensure it supports the language you provide. If you are using a stock replica or default persona, please note that only Elevenlabs and Cartesia supported languages are available. You can find a full list of supported languages for Cartesia [here](https://docs.cartesia.ai/2024-11-13/build-with-cartesia/models#language-support), and for ElevenLabs [here](https://elevenlabs.io/languages).
+                      example: multilingual
+                    recording_s3_bucket_name:
+                      type: string
+                      deprecated: true
+                      description: '**Deprecated.** Use `recording_storage` (also on `properties`) instead. The name of the S3 bucket where the recording will be stored. Existing integrations using this flat field continue to work unchanged.
+
+                        '
+                      example: conversation-recordings
+                    recording_s3_bucket_region:
+                      type: string
+                      deprecated: true
+                      description: '**Deprecated.** Use `recording_storage` (also on `properties`) instead. The region of the S3 bucket where the recording will be stored. Existing integrations using this flat field continue to work unchanged.
+
+                        '
+                      example: us-east-1
+                    aws_assume_role_arn:
+                      type: string
+                      deprecated: true
+                      description: '**Deprecated.** Use `recording_storage` (also on `properties`) instead. The ARN of the role that will be assumed to access the S3 bucket. Existing integrations using this flat field continue to work unchanged.
+
+                        '
+                      example: ''
+                    recording_storage:
+                      $ref: '#/components/schemas/recording_storage_config'
+            examples:
+              Required Parameters Only:
+                value:
+                  replica_id: r90bbd427f71
+                  persona_id: pcb7a34da5fe
+              Full Customizations:
+                value:
+                  replica_id: r90bbd427f71
+                  persona_id: pcb7a34da5fe
+                  callback_url: https://yourwebsite.com/webhook
+                  conversation_name: Improve Sales Technique
+                  conversational_context: I want to improve my sales techniques. Help me practice handling common objections from clients and closing deals more effectively.
+                  properties:
+                    max_call_duration: 1800
+                    participant_left_timeout: 60
+                    participant_absent_timeout: 120
+                    language: multilingual
+                    enable_closed_captions: true
+                    apply_greenscreen: true
+              Audio Only:
+                value:
+                  replica_id: r90bbd427f71
+                  persona_id: pcb7a34da5fe
+                  audio_only: true
+              Private Room:
+                value:
+                  replica_id: r90bbd427f71
+                  persona_id: pcb7a34da5fe
+                  require_auth: true
+              Recording Storage - Amazon S3:
+                value:
+                  replica_id: rf4e9d9790f0
+                  persona_id: pcb7a34da5fe
+                  properties:
+                    enable_recording: true
+                    recording_storage:
+                      provider: s3
+                      bucket_name: conversation-recordings
+                      bucket_region: us-east-1
+                      assume_role_arn: arn:aws:iam::123456789012:role/TavusRecordingWriter
+                      external_id: tavus-acct-abc123
+              Recording Storage - Google Cloud Storage:
+                value:
+                  replica_id: rf4e9d9790f0
+                  persona_id: pcb7a34da5fe
+                  properties:
+                    enable_recording: true
+                    recording_storage:
+                      provider: gcs
+                      bucket_name: conversation-recordings
+                      project_id: my-gcp-project
+                      workload_identity_provider: projects/123456/locations/global/workloadIdentityPools/tavus-recording-pool/providers/tavus-worker
+                      service_account_email: tavus-recording-writer@my-gcp-project.iam.gserviceaccount.com
+              Recording Storage - Azure Blob Storage:
+                value:
+                  replica_id: rf4e9d9790f0
+                  persona_id: pcb7a34da5fe
+                  properties:
+                    enable_recording: true
+                    recording_storage:
+                      provider: azure_blob
+                      storage_account: myrecordingsaccount
+                      container: conversation-recordings
+                      tenant_id: 11111111-2222-3333-4444-555555555555
+                      client_id: 66666666-7777-8888-9999-000000000000
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversation_id:
+                    type: string
+                    description: A unique identifier for the conversation.
+                    example: c123456
+                  conversation_name:
+                    type: string
+                    description: The name of the conversation.
+                    example: A Meeting with Hassaan
+                  conversation_url:
+                    type: string
+                    description: A direct link to join the conversation. This link can be used to join the conversation directly or can be embedded in a website.
+                    example: https://tavus.daily.co/c123456
+                  status:
+                    type: string
+                    description: 'The status of the conversation. Possible values: `active`, `ended`.'
+                    example: active
+                  callback_url:
+                    type: string
+                    description: The url that will receive webhooks with updates of the conversation state.
+                    example: sample.com/callback
+                  created_at:
+                    type: string
+                    description: The date and time the conversation was created.
+                    example: <string>
+                  meeting_token:
+                    type: string
+                    description: A short-lived JWT token required to join the conversation. Only returned when `require_auth` is true. Append as `?t=TOKEN` to the conversation URL or pass to Daily SDK's join() method.
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: There was an error creating the conversation, please reach out to support at support@tavus.io!
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+    get:
+      tags:
+      - Conversations
+      summary: List Conversations
+      description: 'This endpoint returns a list of all Conversations created by the account associated with the API Key in use.
+
+        '
+      operationId: listConversations
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of conversations to return per page. Default is 10.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return. Default is 1.
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: 'Filter the conversations by status. Possible values: active, ended.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Conversations for the current page; use `total_count` for the full count under the applied filters.
+                    items:
+                      type: object
+                      properties:
+                        conversation_id:
+                          type: string
+                          description: A unique identifier for the conversation.
+                          example: c123456
+                        conversation_name:
+                          type: string
+                          description: A name for the conversation.
+                          example: A Meeting with Hassaan
+                        status:
+                          type: string
+                          description: The status of the video.
+                          example: active
+                        conversation_url:
+                          type: string
+                          description: A direct link to join the conversation.
+                          example: https://tavus.daily.co/c123456
+                        callback_url:
+                          type: string
+                          description: The url that will receive webhooks with updates of the conversation state.
+                          example: https://yourwebsite.com/webhook
+                        replica_id:
+                          type: string
+                          description: A unique identifier for the replica used to create this conversation
+                          example: r90bbd427f71
+                        persona_id:
+                          type: string
+                          description: A unique identifier for the persona used to create this conversation
+                          example: pcb7a34da5fe
+                        created_at:
+                          type: string
+                          description: The date and time the conversation was created.
+                          example: ''
+                        updated_at:
+                          type: string
+                          description: The date and time of when the conversation was last updated.
+                  total_count:
+                    type: integer
+                    description: The total number of conversations given the filters provided.
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/conversations/{conversation_id}:
+    parameters:
+    - name: conversation_id
+      in: path
+      required: true
+      description: The unique identifier of the conversation.
+      schema:
+        type: string
+        example: c123456
+    get:
+      tags:
+      - Conversations
+      summary: Get Conversation
+      description: 'This endpoint returns a single conversation by its unique identifier.
+
+        '
+      operationId: getConversation
+      parameters:
+      - name: verbose
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: 'Append `verbose=true` to the URL to receive additional event data in the response, including:
+
+          - `shutdown_reason`: The reason why the conversation ended (e.g., "participant_left_timeout")
+
+          - `system.replica_joined`: When the replica joined the conversation
+
+          - `system.shutdown`: When and why the conversation ended
+
+          - `application.transcription_ready`: The end-of-call transcript. Each entry in `properties.transcript` has `role` (`user` / `assistant` / `system` / `tool`), `content`, `timestamp` (Unix epoch float, seconds), `seconds_from_start`, `duration` (seconds, float) and `inference_id` where available.
+
+          - `application.perception_analysis`: The final visual analysis of the user that includes their appearance, behavior, emotional states, and screen activities
+
+
+          This is particularly useful as an alternative to using the `callback_url` parameter on the [create conversation](/api-reference/conversations/create-conversation) endpoint for retrieving detailed conversation data.
+
+          '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversation_id:
+                    type: string
+                    example: c123456
+                    description: A unique identifier for the conversation.
+                  conversation_name:
+                    type: string
+                    example: A Meeting with Hassaan
+                    description: The name of the conversation.
+                  conversation_url:
+                    type: string
+                    example: https://tavus.daily.co/c123456
+                    description: A direct link to join the conversation.
+                  callback_url:
+                    type: string
+                    description: The url that will receive webhooks with updates of the conversation state.
+                    example: https://yourwebsite.com/webhook
+                  status:
+                    type: string
+                    description: The status of the conversation.
+                    example: active
+                  replica_id:
+                    type: string
+                    description: A unique identifier for the replica used to create this conversation
+                    example: r90bbd427f71
+                  persona_id:
+                    type: string
+                    description: A unique identifier for the persona used to create this conversation
+                    example: pcb7a34da5fe
+                  created_at:
+                    type: string
+                    example: ''
+                    description: The date and time the conversation was created.
+                  updated_at:
+                    type: string
+                    example: ''
+                    description: The date and time of when the conversation was last updated.
+                  events:
+                    type: array
+                    nullable: true
+                    description: When `verbose=true`, additional conversation events (e.g. shutdown, perception analysis payloads, end-of-call transcript).
+                    items:
+                      type: object
+                      properties:
+                        event_type:
+                          type: string
+                          description: Event name (e.g. system.replica_joined, application.transcription_ready, application.perception_analysis).
+                        timestamp:
+                          type: string
+                          description: ISO 8601 time of the event.
+                        properties:
+                          type: object
+                          additionalProperties: true
+                          description: Event-specific payload when present. For `application.transcription_ready`, includes a `transcript` array of per-turn entries.
+              examples:
+                default:
+                  summary: Default response (verbose omitted or false)
+                  value:
+                    conversation_id: c123456
+                    conversation_name: A Meeting with Hassaan
+                    conversation_url: https://tavus.daily.co/c123456
+                    callback_url: https://yourwebsite.com/webhook
+                    status: active
+                    replica_id: r90bbd427f71
+                    persona_id: pcb7a34da5fe
+                    created_at: '2026-04-29T12:00:00Z'
+                    updated_at: '2026-04-29T12:05:00Z'
+                verbose:
+                  summary: Example when verbose=true
+                  value:
+                    conversation_id: conv_123
+                    status: ended
+                    replica_id: replica_abc
+                    persona_id: persona_xyz
+                    created_at: '2026-04-29T03:45:49Z'
+                    updated_at: '2026-04-29T03:47:01Z'
+                    events:
+                    - event_type: system.replica_joined
+                      timestamp: '2026-04-29T03:45:53Z'
+                    - event_type: application.transcription_ready
+                      timestamp: '2026-04-29T03:47:00Z'
+                      properties:
+                        transcript:
+                        - role: assistant
+                          content: Hi, welcome. What brought you here today?
+                          timestamp: 1779475657.84
+                          seconds_from_start: 0.0
+                          duration: 2.15
+                          inference_id: inf_abc123
+                        - role: user
+                          content: Just testing.
+                          timestamp: 1779475684.88
+                          seconds_from_start: 27.04
+                          duration: 1.84
+                    - event_type: system.shutdown
+                      timestamp: '2026-04-29T03:47:01Z'
+                      properties:
+                        reason: participant_left_timeout
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid conversation_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Conversations
+      summary: Delete Conversation
+      description: 'This endpoint deletes a single conversation by its unique identifier.
+
+        '
+      operationId: deleteConversation
+      parameters:
+      - name: hard
+        in: query
+        schema:
+          type: boolean
+          example: true
+        description: 'If set to true, the conversation and associated assets will be hard deleted. CAUTION: This action is irrevocable.'
+      responses:
+        '204':
+          description: NO CONTENT
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid conversation_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/conversations/{conversation_id}/end:
+    parameters:
+    - name: conversation_id
+      in: path
+      required: true
+      description: The unique identifier of the conversation.
+      schema:
+        type: string
+        example: c123456
+    post:
+      tags:
+      - Conversations
+      summary: End Conversation
+      description: 'This endpoint ends a single conversation by its unique identifier.
+
+        '
+      operationId: endConversation
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid conversation_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+components:
+  schemas:
+    recording_storage_config:
+      type: object
+      description: 'Provider-agnostic recording storage configuration. Supports Amazon S3 (any region),
+
+        Google Cloud Storage via Workload Identity Federation, and Azure Blob Storage via
+
+        Entra ID Federated Credentials. All fields are non-secret identifiers — every
+
+        provider uses federated identity, so you configure a trust relationship on your
+
+        side and pass identifiers to us, never credentials.
+
+
+        Use this in place of the legacy `recording_s3_bucket_name` / `recording_s3_bucket_region` /
+
+        `aws_assume_role_arn` fields. Existing customers using the flat fields continue to
+
+        work unchanged.
+
+        '
+      required:
+      - provider
+      properties:
+        provider:
+          type: string
+          enum:
+          - s3
+          - gcs
+          - azure_blob
+          description: Storage provider discriminator.
+          example: s3
+        bucket_name:
+          type: string
+          description: Bucket name. Used when `provider` is `s3` or `gcs`.
+          example: conversation-recordings
+        bucket_region:
+          type: string
+          description: 'AWS region (e.g. `us-east-1`, `eu-north-1`). Used when `provider` is `s3`. Any AWS region is
+
+            supported — Daily-supported regions get a direct write; others are routed through a Tavus-managed
+
+            Cloudflare Worker that copies the recording into your bucket via `sts:AssumeRole`.
+
+            '
+          example: us-east-1
+        assume_role_arn:
+          type: string
+          description: IAM role ARN that Tavus assumes to write to your bucket. Used when `provider` is `s3`.
+          example: arn:aws:iam::123456789012:role/TavusRecordingWriter
+        external_id:
+          type: string
+          description: Optional `ExternalId` value to include in the AssumeRole call. Used when `provider` is `s3`.
+          example: tavus-acct-abc123
+        project_id:
+          type: string
+          description: GCP project ID containing the bucket. Used when `provider` is `gcs`.
+          example: my-gcp-project
+        workload_identity_provider:
+          type: string
+          description: 'Resource name of your Workload Identity Pool Provider — without the `//iam.googleapis.com/`
+
+            prefix (Tavus prepends it). Used when `provider` is `gcs`.
+
+            '
+          example: projects/123456/locations/global/workloadIdentityPools/tavus-pool/providers/tavus-cf-worker
+        service_account_email:
+          type: string
+          description: Email of the service account that has `storage.objects.create` on the bucket. Used when `provider` is `gcs`.
+          example: tavus-recording-writer@my-gcp-project.iam.gserviceaccount.com
+        storage_account:
+          type: string
+          description: Azure storage account name. Used when `provider` is `azure_blob`.
+          example: myrecordingsaccount
+        container:
+          type: string
+          description: Container within the storage account. Used when `provider` is `azure_blob`.
+          example: conversation-recordings
+        tenant_id:
+          type: string
+          description: Azure AD tenant UUID. Used when `provider` is `azure_blob`.
+          example: 11111111-2222-3333-4444-555555555555
+        client_id:
+          type: string
+          description: App Registration client UUID. Used when `provider` is `azure_blob`.
+          example: 66666666-7777-8888-9999-000000000000
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key

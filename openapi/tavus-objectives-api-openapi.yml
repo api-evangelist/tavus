@@ -1,0 +1,513 @@
+openapi: 3.0.3
+info:
+  title: Tavus Developer API Collection Conversations Objectives API
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://tavusapi.com
+security:
+- apiKey: []
+tags:
+- name: Objectives
+paths:
+  /v2/objectives:
+    post:
+      tags:
+      - Objectives
+      summary: Create Objectives
+      description: 'This endpoint creates objectives for a persona.
+
+        '
+      operationId: createObjectives
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  description: Array of objectives to create. Objectives provide goal-oriented instructions that help guide conversations toward specific achievements and desired outcomes.
+                  items:
+                    type: object
+                    properties:
+                      objective_name:
+                        type: string
+                        description: A descriptive name for the objective. This must be a string value without spaces.
+                        example: ask_if_new_patient
+                      objective_prompt:
+                        type: string
+                        description: The detailed prompt that defines what the objective should accomplish.
+                        example: Ask the patient if they are new or have been here before
+                      confirmation_mode:
+                        type: string
+                        description: How the objective completion should be confirmed. If set to `manual`, the user will be prompted to confirm the objective completion. If set to `auto`, the LLM will determine whether the objective was completed or not.
+                        enum:
+                        - auto
+                        - manual
+                        default: auto
+                        example: auto
+                      output_variables:
+                        type: array
+                        description: Optional list of variables that should be extracted or collected during the objective.
+                        items:
+                          type: string
+                        example:
+                        - patient_status
+                      modality:
+                        type: string
+                        description: The communication modality for the objective. If set to `verbal`, the objective will be completed by the user's responses. If set to `visual`, the objective can only be completed by visual / perception cues observed by Raven.
+                        enum:
+                        - verbal
+                        - visual
+                        default: verbal
+                        example: verbal
+                      next_conditional_objectives:
+                        type: object
+                        description: A mapping of objective names to conditions that must be satisfied for that objective to be activated once this objective is completed. Use this to write multiple conditional objectives.
+                        additionalProperties:
+                          type: string
+                        example:
+                          new_patient_intake_process: If the patient has never been to the practice before
+                          existing_patient_intake_process: If the patient has been to the practice before
+                      next_required_objective:
+                        type: string
+                        description: The name of the next required objective that will be activated once the current objective is completed. Use this to write a single next required objective without conditions.
+                        example: get_patient_name
+                      callback_url:
+                        type: string
+                        description: Optional URL that will receive notifications when the objective is completed.
+                        example: https://your-server.com/webhook
+                    required:
+                    - objective_name
+                    - objective_prompt
+              required:
+              - data
+      responses:
+        '200':
+          description: Objective created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objectives_id:
+                    type: string
+                    description: Unique identifier for the created objective
+                    example: o12345
+                  objective_name:
+                    type: string
+                    description: Name of the objective
+                    example: New Objectives
+                  status:
+                    type: string
+                    description: Current status of the objective
+                    example: active
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the objective was created
+                    example: '2024-01-15T10:30:00Z'
+        '400':
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message describing the validation failure
+                    example: objective_name is required
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+    get:
+      tags:
+      - Objectives
+      summary: Get Objectives
+      description: 'This endpoint returns a list of all objectives.
+
+        '
+      operationId: getObjectives
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of objectives to return per page. Default is 10.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page number to return. Default is 1.
+      responses:
+        '200':
+          description: Successfully retrieved objectives
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: Objectives for the current page; use `total_count` for the full count.
+                    items:
+                      type: object
+                      properties:
+                        objectives_id:
+                          type: string
+                          description: Unique identifier for the objective
+                          example: o12345
+                        objective_name:
+                          type: string
+                          description: Name of the objective
+                          example: ask_if_new_patient
+                        objective_prompt:
+                          type: string
+                          description: The detailed prompt that defines what the objective should accomplish
+                          example: Ask the patient if they are new or have been here before
+                        confirmation_mode:
+                          type: string
+                          description: How the objective completion should be confirmed
+                          example: auto
+                        output_variables:
+                          type: array
+                          description: List of variables that should be extracted or collected during the objective
+                          items:
+                            type: string
+                          example:
+                          - patient_status
+                        modality:
+                          type: string
+                          description: The communication modality for the objective
+                          example: verbal
+                        next_conditional_objectives:
+                          type: object
+                          description: Mapping of objective names to conditions that must be satisfied for that objective to be activated. Use this to write multiple conditional objectives
+                          additionalProperties:
+                            type: string
+                          example:
+                            new_patient_intake_process: If the patient has never been to the practice before
+                            existing_patient_intake_process: If the patient has been to the practice before
+                        next_required_objective:
+                          type: string
+                          description: The name of the next required objective that will be activated once the current objective is completed. Use this to write a single next required objective without conditions
+                          example: get_patient_name
+                        callback_url:
+                          type: string
+                          description: URL that will receive notifications when the objective is completed
+                          example: https://your-server.com/webhook
+                        created_at:
+                          type: string
+                          description: ISO 8601 timestamp of when the objective was created
+                          example: '2024-01-15T10:30:00Z'
+                        updated_at:
+                          type: string
+                          description: ISO 8601 timestamp of when the objective was last updated
+                          example: '2024-01-15T10:30:00Z'
+                  total_count:
+                    type: integer
+                    description: The total number of objectives
+                    example: 25
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+      security:
+      - apiKey: []
+  /v2/objectives/{objectives_id}:
+    parameters:
+    - name: objectives_id
+      in: path
+      required: true
+      description: The unique identifier of the objective.
+      schema:
+        type: string
+        example: o12345
+    get:
+      tags:
+      - Objectives
+      summary: Get Objective
+      description: 'This endpoint returns a single objective by its unique identifier.
+
+        '
+      operationId: getObjective
+      parameters:
+      - name: objectives_id
+        in: path
+        required: true
+        description: The unique identifier of the objective.
+        schema:
+          type: string
+          example: o12345
+      responses:
+        '200':
+          description: Successfully retrieved objective
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      objective_name:
+                        type: string
+                        description: Name of the objective
+                        example: ask_if_new_patient
+                      objective_prompt:
+                        type: string
+                        description: The detailed prompt that defines what the objective should accomplish
+                        example: Ask the patient if they are new or have been here before
+                      confirmation_mode:
+                        type: string
+                        description: How the objective completion should be confirmed
+                        example: auto
+                      output_variables:
+                        type: array
+                        description: List of variables that should be extracted or collected during the objective
+                        items:
+                          type: string
+                        example:
+                        - patient_status
+                      modality:
+                        type: string
+                        description: The communication modality for the objective
+                        example: verbal
+                      next_conditional_objectives:
+                        type: object
+                        description: Mapping of objective names to conditions that must be satisfied for that objective to be activated
+                        additionalProperties:
+                          type: string
+                        example:
+                          new_patient_intake_process: If the patient has never been to the practice before
+                          existing_patient_intake_process: If the patient has been to the practice before
+                      next_required_objective:
+                        type: string
+                        description: The name of the next required objective that will be activated once the current objective is completed. Use this to write a single next required objective without conditions
+                        example: get_patient_name
+                      callback_url:
+                        type: string
+                        description: URL that will receive notifications when the objective is completed
+                        example: https://your-server.com/webhook
+                      created_at:
+                        type: string
+                        description: ISO 8601 timestamp of when the objective was created
+                        example: '2024-01-15T10:30:00Z'
+                      updated_at:
+                        type: string
+                        description: ISO 8601 timestamp of when the objective was last updated
+                        example: '2024-01-15T10:30:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid objectives_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Objective not found
+      security:
+      - apiKey: []
+    patch:
+      tags:
+      - Objectives
+      summary: Patch Objective
+      description: 'This endpoint allows you to update specific fields of an objective using JSON Patch operations.
+
+        '
+      operationId: patchObjective
+      requestBody:
+        description: "**Note:** The `path` field is a JSON Pointer string that references a location within the target document where the operation is performed.\n\nFor example:\n\n```json\n[\n  { \"op\": \"replace\", \"path\": \"/data/0/objective_name\", \"value\": \"updated_objective_name\" },\n  { \"op\": \"replace\", \"path\": \"/data/0/objective_prompt\", \"value\": \"Updated prompt for the objective\" },\n  { \"op\": \"replace\", \"path\": \"/data/0/confirmation_mode\", \"value\": \"manual\" },\n  { \"op\": \"add\", \"path\": \"/data/0/output_variables\", \"value\": [\"new_variable\"] },\n  { \"op\": \"replace\", \"path\": \"/data/0/modality\", \"value\": \"visual\" },\n  { \"op\": \"remove\", \"path\": \"/data/0/callback_url\" }\n]\n```\n"
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  op:
+                    type: string
+                    description: 'The operation to perform. Must be one of: add, remove, replace, copy, move, test'
+                    enum:
+                    - add
+                    - remove
+                    - replace
+                    - copy
+                    - move
+                    - test
+                    example: replace
+                  path:
+                    type: string
+                    description: A JSON Pointer string that references a location within the target document where the operation is performed
+                    example: /objective_name
+                  value:
+                    description: The value to be used within the operation. **This field is not required for the `remove` operation**.
+                    example: updated_objective_name
+                required:
+                - op
+                - path
+            examples:
+              Update Objective Name:
+                value:
+                - op: replace
+                  path: /objective_name
+                  value: updated_objective_name
+              Update Objective Prompt:
+                value:
+                - op: replace
+                  path: /objective_prompt
+                  value: Updated prompt for the objective
+              Add Output Variables:
+                value:
+                - op: add
+                  path: /output_variables
+                  value:
+                  - new_variable
+                  - another_variable
+              Remove Callback URL:
+                value:
+                - op: remove
+                  path: /callback_url
+      responses:
+        '200':
+          description: Objective updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success message
+                    example: Objective updated successfully
+        '304':
+          description: No changes were made to the objective
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid patch operation
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Objective not found
+      security:
+      - apiKey: []
+    delete:
+      tags:
+      - Objectives
+      summary: Delete Objective
+      description: 'This endpoint deletes a single objective by its unique identifier.
+
+        '
+      operationId: deleteObjective
+      responses:
+        '204':
+          description: NO CONTENT - Objective deleted successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Invalid objectives_id
+        '401':
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: The error message.
+                    example: Invalid access token
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message.
+                    example: Objective not found
+      security:
+      - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
