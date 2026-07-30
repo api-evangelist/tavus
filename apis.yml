@@ -12,9 +12,22 @@ description: >-
   recruiting experiences, and monetizes through usage-based developer
   pricing and enterprise contracts.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tavus.png
 tags:
   - Artificial Intelligence
   - Generative AI
@@ -31,106 +44,206 @@ created: '2026-05-23'
 modified: '2026-05-23'
 specificationVersion: '0.20'
 apis:
-  - aid: tavus:tavus-api
-    name: Tavus API
+- aid: tavus:tavus-api
+  name: Tavus API
+  description: >-
+    The Tavus REST API powers personalized video generation and real-time Conversational Video Interface
+    sessions. It exposes endpoints for replicas (Phoenix-4 video and image-to-replica), async video generation,
+    real-time conversations, personas, and document knowledge bases, plus webhooks for lifecycle events.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Video
+  - Conversational AI
+  - Replicas
+  - Personas
+  - Real Time
+  - Knowledge Base
+  properties:
+  - type: Documentation
+    url: https://docs.tavus.io/
+  - type: GettingStarted
+    url: https://docs.tavus.io/sections/introduction
+  - type: Signup
+    url: https://platform.tavus.io/auth/sign-up
+  - type: API
+    url: https://docs.tavus.io/api-reference/overview
+  - type: SDKs
+    url: https://www.npmjs.com/package/@tavus/cvi-ui
+  - type: GitHubRepository
+    url: https://github.com/Tavus-Engineering/tavus-examples
+  - type: Pricing
+    url: https://www.tavus.io/pricing
+  - type: Authentication
+    url: https://docs.tavus.io/api-reference/authentication
+  features:
+  - name: Phoenix-4 Replicas
+    description: Train high-fidelity replicas from a short training video.
+  - name: Image-to-Replica
+    description: Generate replicas from a single image for faster onboarding.
+  - name: Stock Replicas
+    description: Use pre-built stock replicas for instant integration.
+  - name: Async Video Generation
     description: >-
-      The Tavus REST API powers personalized video generation and real-time
-      Conversational Video Interface sessions. It exposes endpoints for
-      replicas (Phoenix-4 video and image-to-replica), async video
-      generation, real-time conversations, personas, and document knowledge
-      bases, plus webhooks for lifecycle events.
-    humanURL: https://docs.tavus.io/
-    baseURL: https://tavusapi.com
-    tags:
-      - Video
-      - Conversational AI
-      - Replicas
-      - Personas
-      - Real Time
-      - Knowledge Base
-    properties:
-      - type: Documentation
-        url: https://docs.tavus.io/
-      - type: GettingStarted
-        url: https://docs.tavus.io/sections/introduction
-      - type: Signup
-        url: https://platform.tavus.io/auth/sign-up
-      - type: API
-        url: https://docs.tavus.io/api-reference/overview
-      - type: SDKs
-        url: https://www.npmjs.com/package/@tavus/cvi-ui
-      - type: GitHubRepository
-        url: https://github.com/Tavus-Engineering/tavus-examples
-      - type: Pricing
-        url: https://www.tavus.io/pricing
-      - type: Authentication
-        url: https://docs.tavus.io/api-reference/authentication
-    features:
-      - name: Phoenix-4 Replicas
-        description: >-
-          Train high-fidelity replicas from a short training video.
-      - name: Image-to-Replica
-        description: >-
-          Generate replicas from a single image for faster onboarding.
-      - name: Stock Replicas
-        description: >-
-          Use pre-built stock replicas for instant integration.
-      - name: Async Video Generation
-        description: >-
-          Create personalized videos from scripts or audio with replica and
-          background customization.
-      - name: Real-Time Conversations
-        description: >-
-          Spin up live AI video conversations with audio-only mode, closed
-          captions, participant limits, and private rooms.
-      - name: Personas
-        description: >-
-          Configure replica behavior, guardrails, objectives, and tool
-          calling, including support for custom LLMs.
-      - name: Knowledge Base
-        description: >-
-          Upload, recrawl, and manage documents and websites to ground
-          replica responses.
-      - name: React CVI Components
-        description: >-
-          Embed conversational video into web apps using the @tavus/cvi-ui
-          React component library and hooks.
-      - name: Webhooks
-        description: >-
-          Receive callbacks for video, conversation, and replica lifecycle
-          events.
-    useCases:
-      - name: AI Sales Reps
-        description: >-
-          Conduct lifelike video discovery and demo calls with a digital
-          rep.
-      - name: Healthcare Intake
-        description: >-
-          Walk patients through intake and screening with empathetic video
-          AI.
-      - name: Personalized Outreach Video
-        description: >-
-          Generate per-recipient videos for marketing and recruiting at
-          scale.
-      - name: AI Tutors and Coaching
-        description: >-
-          Deliver interactive video tutoring grounded in course content.
-      - name: Customer Support Avatars
-        description: >-
-          Provide always-on conversational video support inside web and
-          mobile apps.
-    integrations:
-      - name: React
-      - name: Daily
-      - name: Custom LLMs
-      - name: Webhooks
-      - name: Slack
-      - name: Zapier
-    authentication:
-      - type: API Key
-        description: >-
-          API keys are generated in the Tavus Developer Portal and sent in
-          the x-api-key header on every request.
+      Create personalized videos from scripts or audio with replica and background customization.
+  - name: Real-Time Conversations
+    description: >-
+      Spin up live AI video conversations with audio-only mode, closed captions, participant limits, and
+      private rooms.
+  - name: Personas
+    description: >-
+      Configure replica behavior, guardrails, objectives, and tool calling, including support for custom
+      LLMs.
+  - name: Knowledge Base
+    description: Upload, recrawl, and manage documents and websites to ground replica responses.
+  - name: React CVI Components
+    description: >-
+      Embed conversational video into web apps using the @tavus/cvi-ui React component library and hooks.
+  - name: Webhooks
+    description: Receive callbacks for video, conversation, and replica lifecycle events.
+  useCases:
+  - name: AI Sales Reps
+    description: Conduct lifelike video discovery and demo calls with a digital rep.
+  - name: Healthcare Intake
+    description: Walk patients through intake and screening with empathetic video AI.
+  - name: Personalized Outreach Video
+    description: Generate per-recipient videos for marketing and recruiting at scale.
+  - name: AI Tutors and Coaching
+    description: Deliver interactive video tutoring grounded in course content.
+  - name: Customer Support Avatars
+    description: Provide always-on conversational video support inside web and mobile apps.
+  integrations:
+  - name: React
+  - name: Daily
+  - name: Custom LLMs
+  - name: Webhooks
+  - name: Slack
+  - name: Zapier
+  authentication:
+  - type: API Key
+    description: >-
+      API keys are generated in the Tavus Developer Portal and sent in the x-api-key header on every request.
+- aid: tavus:tavus-conversations-api
+  name: Tavus Conversations API
+  description: The Conversations API from Tavus — 3 operation(s) for conversations.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-conversations-api-openapi.yml
+- aid: tavus:tavus-documents-api
+  name: Tavus Documents API
+  description: The Documents API from Tavus — 3 operation(s) for documents.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-documents-api-openapi.yml
+- aid: tavus:tavus-guardrails-api
+  name: Tavus Guardrails API
+  description: The Guardrails API from Tavus — 2 operation(s) for guardrails.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Guardrails
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-guardrails-api-openapi.yml
+- aid: tavus:tavus-lipsync-api
+  name: Tavus Lipsync API
+  description: The Lipsync API from Tavus — 2 operation(s) for lipsync.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Lipsync
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-lipsync-api-openapi.yml
+- aid: tavus:tavus-objectives-api
+  name: Tavus Objectives API
+  description: The Objectives API from Tavus — 2 operation(s) for objectives.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Objectives
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-objectives-api-openapi.yml
+- aid: tavus:tavus-personas-api
+  name: Tavus Personas API
+  description: The Personas API from Tavus — 2 operation(s) for personas.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Personas
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-personas-api-openapi.yml
+- aid: tavus:tavus-pronunciation-dictionaries-api
+  name: Tavus Pronunciation Dictionaries API
+  description: >-
+    The Pronunciation Dictionaries API from Tavus — 2 operation(s) for pronunciation dictionaries.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Pronunciation Dictionaries
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-pronunciation-dictionaries-api-openapi.yml
+- aid: tavus:tavus-replacements-api
+  name: Tavus Replacements API
+  description: The Replacements API from Tavus — 2 operation(s) for replacements.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Replacements
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-replacements-api-openapi.yml
+- aid: tavus:tavus-replicas-api
+  name: Tavus Replicas API
+  description: The Replicas API from Tavus — 3 operation(s) for replicas.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Replicas
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-replicas-api-openapi.yml
+- aid: tavus:tavus-transcriptions-api
+  name: Tavus Transcriptions API
+  description: The Transcriptions API from Tavus — 2 operation(s) for transcriptions.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Transcriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-transcriptions-api-openapi.yml
+- aid: tavus:tavus-videos-api
+  name: Tavus Videos API
+  description: The Videos API from Tavus — 3 operation(s) for videos.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Videos
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-videos-api-openapi.yml
+- aid: tavus:tavus-voices-api
+  name: Tavus Voices API
+  description: The Voices API from Tavus — 1 operation(s) for voices.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Voices
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-voices-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/tavus-agentic-access.yml
