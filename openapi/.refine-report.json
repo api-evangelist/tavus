@@ -1,0 +1,36 @@
+{
+  "provider": "tavus",
+  "sources": [
+    "tavus-conversations-api-openapi.yml",
+    "tavus-documents-api-openapi.yml",
+    "tavus-guardrails-api-openapi.yml",
+    "tavus-lipsync-api-openapi.yml",
+    "tavus-objectives-api-openapi.yml",
+    "tavus-personas-api-openapi.yml",
+    "tavus-pronunciation-dictionaries-api-openapi.yml",
+    "tavus-replacements-api-openapi.yml",
+    "tavus-replicas-api-openapi.yml",
+    "tavus-transcriptions-api-openapi.yml",
+    "tavus-videos-api-openapi.yml",
+    "tavus-voices-api-openapi.yml"
+  ],
+  "outputs": [
+    "tavus-conversations-api-openapi.yml",
+    "tavus-documents-api-openapi.yml",
+    "tavus-guardrails-api-openapi.yml",
+    "tavus-lipsync-api-openapi.yml",
+    "tavus-objectives-api-openapi.yml",
+    "tavus-personas-api-openapi.yml",
+    "tavus-pronunciation-dictionaries-api-openapi.yml",
+    "tavus-replacements-api-openapi.yml",
+    "tavus-replicas-api-openapi.yml",
+    "tavus-transcriptions-api-openapi.yml",
+    "tavus-videos-api-openapi.yml",
+    "tavus-voices-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
