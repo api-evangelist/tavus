@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Voices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Voices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Voices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/voices",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (1–100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-based)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring match on `voice_name`."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort `voice_name` ascending or descending."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "If set, only voices whose replica tags include this tag name (case-insensitive)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns available stock **`voice_name`** values and their linked **replica** metadata. When you [Create Replica](/api-reference/phoenix-replica-model/create-replica) with **`train_image_url`** (image-to-replica), **`voice_name`** is required—use this list to pick a valid slug and to preview options.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

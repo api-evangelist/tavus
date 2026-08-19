@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Replicas API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Replicas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Replicas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replicas",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of replicas to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional replica data such as the replica type."
+              },
+              {
+                "name": "replica_type",
+                "value": "",
+                "type": "query",
+                "description": "If set to user, the response will only include user replicas. If set to system, the response will only include stock replicas."
+              },
+              {
+                "name": "replica_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of replica ids to filter the response by. Example: `replica_ids=r90bbd427f71`"
+              },
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter the list to replicas trained on a specific Phoenix model (e.g. `phoenix-3`, `phoenix-4`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Replicas created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/replicas",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new replica from a training video or image URL for use in conversations—see [Which training path?](/sections/replica/which-training-path) for preparation, consent, and media requirements."
+        },
+        {
+          "info": {
+            "name": "Get Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the replica."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional replica data such as replica_type."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single Replica by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the replica."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the replica and associated assets (such as training footage) will be hard deleted. CAUTION: This action is irrevocable. Note that a hard delete of a replica does *not* delete the conversation created using said replica. See [Delete Video](https://docs.tavus.io/api-reference/video-request/delete-video) for more info."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a Replica by its unique ID; deleted replicas cannot be used in a conversation."
+        },
+        {
+          "info": {
+            "name": "Rename Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/replicas/:replica_id/name",
+            "params": [
+              {
+                "name": "replica_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the replica."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint renames a single Replica by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

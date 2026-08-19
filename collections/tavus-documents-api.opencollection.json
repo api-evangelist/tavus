@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Documents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/documents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of documents to return per page (default: 10)"
+              },
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Page number for pagination (0-based, default: 0)"
+              },
+              {
+                "name": "sort",
+                "value": "ascending",
+                "type": "query",
+                "description": "Sort direction for the results (default: ascending)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter documents by status"
+              },
+              {
+                "name": "name_or_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Search for documents by name or UUID"
+              },
+              {
+                "name": "tags",
+                "value": "important,meeting",
+                "type": "query",
+                "description": "Comma-separated list of tags to filter by"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of documents.\n"
+        },
+        {
+          "info": {
+            "name": "Create Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload documents to your knowledge base for personas to reference during conversations."
+        },
+        {
+          "info": {
+            "name": "Get Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "d8-5c71baca86fc",
+                "type": "path",
+                "description": "The unique identifier of the document to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve detailed information about a specific document using its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Update Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the document to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a document's `document_name` and `tags`."
+        },
+        {
+          "info": {
+            "name": "Delete Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the document to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a document and its associated data using its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Recrawl Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/documents/:document_id/recrawl",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "d8-5c71baca86fc",
+                "type": "path",
+                "description": "Unique id of the crawl-backed **website** document to refresh. Use when the source site changed, you want to refresh content on a schedule, or retry after crawl or processing errors.\n\nThe document must be in **`ready`** or **`error`** (otherwise `409`). It must have been created with a `crawl` configuration unless you supply `crawl` in the request body for this call.\n\nThe same document cannot be recrawled more than once within each **1-hour** cooldown (`429` if invoked too soon).\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Trigger a recrawl of a website document to fetch fresh content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

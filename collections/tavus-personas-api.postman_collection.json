@@ -1,0 +1,1201 @@
+{
+  "item": [
+    {
+      "id": "e6e5a646-3089-45f1-8c64-794118671188",
+      "name": "Personas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bfd4a081-8b0f-4b19-a98d-1fbe989e8f8d",
+          "name": "Create Persona",
+          "request": {
+            "name": "Create Persona",
+            "description": {
+              "content": "Creates a persona that configures how a replica behaves and sounds in CVI for every conversation that uses that persona.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "personas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"persona_name\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"pipeline_mode\": \"<string>\",\n  \"default_replica_id\": \"<string>\",\n  \"document_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"document_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectives_id\": \"<string>\",\n  \"guardrails_id\": \"<string>\",\n  \"layers\": {\n    \"perception\": {\n      \"perception_model\": \"raven-1\",\n      \"visual_awareness_queries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"visual_tool_prompt\": \"<string>\",\n      \"visual_tools\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"audio_awareness_queries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"audio_tool_prompt\": \"<string>\",\n      \"audio_tools\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    },\n    \"stt\": {\n      \"stt_engine\": \"tavus-auto\",\n      \"hotwords\": \"<string>\"\n    },\n    \"conversational_flow\": {\n      \"turn_detection_model\": \"<string>\",\n      \"turn_taking_patience\": \"<string>\",\n      \"replica_interruptibility\": \"<string>\",\n      \"voice_isolation\": \"near\",\n      \"wake_phrase\": \"<string>\",\n      \"idle_engagement\": \"off\"\n    },\n    \"llm\": {\n      \"model\": \"<string>\",\n      \"base_url\": \"<string>\",\n      \"api_key\": \"<string>\",\n      \"speculative_inference\": true,\n      \"tools\": \"<array>\",\n      \"headers\": \"<object>\",\n      \"extra_body\": \"<object>\"\n    },\n    \"tts\": {\n      \"api_key\": \"<string>\",\n      \"tts_engine\": \"<string>\",\n      \"external_voice_id\": \"<string>\",\n      \"voice_settings\": \"<object>\",\n      \"tts_emotion_control\": true,\n      \"tts_model_name\": \"<string>\",\n      \"pronunciation_dictionary_id\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f60dd539-3382-4c29-89c7-fa7b4ada2033",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pipeline_mode\": \"full\",\n  \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"persona_id\": \"pcb7a34da5fe\",\n  \"persona_name\": \"Life Coach\",\n  \"created_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab874fa1-8b71-4d8a-9b67-f2bcc022e422",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pipeline_mode\": \"full\",\n  \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid replica_uuid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2eaa994f-4a25-4a85-b0c2-792f2effc1dd",
+              "name": "UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pipeline_mode\": \"full\",\n  \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "854718cb-953c-417b-906f-2cc49c452bc4",
+          "name": "List Personas",
+          "request": {
+            "name": "List Personas",
+            "description": {
+              "content": "This endpoint returns a list of all Personas created by the account associated with the API Key in use.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "personas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of personas to return per page. Default is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page number to return. Default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "persona_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "11f7b958-5958-4e55-963b-914d0934892f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "persona_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"persona_id\": \"pcb7a34da5fe\",\n      \"persona_name\": \"Life Coach\",\n      \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\",\n      \"default_replica_id\": \"r90bbd427f71\",\n      \"document_ids\": [\n        \"d1234567890\",\n        \"d2468101214\"\n      ],\n      \"document_tags\": [\n        \"product_info\",\n        \"company_policies\"\n      ],\n      \"layers\": {\n        \"llm\": {\n          \"model\": \"string\",\n          \"base_url\": \"your-base-url\",\n          \"api_key\": \"your-api-key\",\n          \"tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"get_current_weather\",\n                \"description\": \"Get the current weather in a given location\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"location\": {\n                      \"type\": \"string\",\n                      \"description\": \"The city and state, e.g. San Francisco, CA\"\n                    },\n                    \"unit\": {\n                      \"type\": \"string\",\n                      \"enum\": [\n                        \"celsius\",\n                        \"fahrenheit\"\n                      ]\n                    }\n                  },\n                  \"required\": [\n                    \"location\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"tts\": {\n          \"api_key\": \"your-api-key\",\n          \"tts_engine\": \"cartesia\",\n          \"external_voice_id\": \"external-voice-id\",\n          \"voice_settings\": {\n            \"speed\": 0.5,\n            \"emotion\": [\n              \"positivity:high\",\n              \"curiosity\"\n            ]\n          },\n          \"tts_emotion_control\": true,\n          \"tts_model_name\": \"sonic-3\",\n          \"pronunciation_dictionary_id\": \"pd_abc123def456\"\n        },\n        \"perception\": {\n          \"perception_model\": \"raven-1\",\n          \"visual_awareness_queries\": [\n            \"Is the user showing an ID card?\",\n            \"Does the user appear distressed or uncomfortable?\"\n          ],\n          \"visual_tool_prompt\": \"You have a tool to notify the system when an ID card is detected, named `notify_if_id_shown`. You MUST use this tool when a form of ID is detected.\",\n          \"visual_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"notify_if_id_shown\",\n                \"description\": \"Use this function when a drivers license or passport is detected in the image with high confidence. After collecting the ID, internally use final_ask()\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id_type\": {\n                      \"type\": \"string\",\n                      \"description\": \"best guess on what type of ID it is\"\n                    }\n                  },\n                  \"required\": [\n                    \"id_type\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"audio_awareness_queries\": [\n            \"Does the user sound frustrated or confused?\",\n            \"Is the user speaking quickly as if in a hurry?\"\n          ],\n          \"audio_tool_prompt\": \"You have a tool to escalate to a human agent when the user sounds very frustrated, named `escalate_to_human`. Use this tool when detecting sustained frustration.\",\n          \"audio_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"escalate_to_human\",\n                \"description\": \"Escalate the conversation to a human agent when user frustration is detected\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"reason\": {\n                      \"type\": \"string\",\n                      \"description\": \"The reason for escalation\"\n                    }\n                  },\n                  \"required\": [\n                    \"reason\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"stt\": {\n          \"stt_engine\": \"tavus-auto\",\n          \"hotwords\": \"This is a hotword example\"\n        }\n      },\n      \"created_at\": \"\",\n      \"updated_at\": \"string\"\n    },\n    {\n      \"persona_id\": \"pcb7a34da5fe\",\n      \"persona_name\": \"Life Coach\",\n      \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\",\n      \"default_replica_id\": \"r90bbd427f71\",\n      \"document_ids\": [\n        \"d1234567890\",\n        \"d2468101214\"\n      ],\n      \"document_tags\": [\n        \"product_info\",\n        \"company_policies\"\n      ],\n      \"layers\": {\n        \"llm\": {\n          \"model\": \"string\",\n          \"base_url\": \"your-base-url\",\n          \"api_key\": \"your-api-key\",\n          \"tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"get_current_weather\",\n                \"description\": \"Get the current weather in a given location\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"location\": {\n                      \"type\": \"string\",\n                      \"description\": \"The city and state, e.g. San Francisco, CA\"\n                    },\n                    \"unit\": {\n                      \"type\": \"string\",\n                      \"enum\": [\n                        \"celsius\",\n                        \"fahrenheit\"\n                      ]\n                    }\n                  },\n                  \"required\": [\n                    \"location\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"tts\": {\n          \"api_key\": \"your-api-key\",\n          \"tts_engine\": \"elevenlabs\",\n          \"external_voice_id\": \"external-voice-id\",\n          \"voice_settings\": {\n            \"speed\": 0.5,\n            \"emotion\": [\n              \"positivity:high\",\n              \"curiosity\"\n            ]\n          },\n          \"tts_emotion_control\": true,\n          \"tts_model_name\": \"sonic-3\",\n          \"pronunciation_dictionary_id\": \"pd_abc123def456\"\n        },\n        \"perception\": {\n          \"perception_model\": \"raven-1\",\n          \"visual_awareness_queries\": [\n            \"Is the user showing an ID card?\",\n            \"Does the user appear distressed or uncomfortable?\"\n          ],\n          \"visual_tool_prompt\": \"You have a tool to notify the system when an ID card is detected, named `notify_if_id_shown`. You MUST use this tool when a form of ID is detected.\",\n          \"visual_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"notify_if_id_shown\",\n                \"description\": \"Use this function when a drivers license or passport is detected in the image with high confidence. After collecting the ID, internally use final_ask()\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id_type\": {\n                      \"type\": \"string\",\n                      \"description\": \"best guess on what type of ID it is\"\n                    }\n                  },\n                  \"required\": [\n                    \"id_type\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"audio_awareness_queries\": [\n            \"Does the user sound frustrated or confused?\",\n            \"Is the user speaking quickly as if in a hurry?\"\n          ],\n          \"audio_tool_prompt\": \"You have a tool to escalate to a human agent when the user sounds very frustrated, named `escalate_to_human`. Use this tool when detecting sustained frustration.\",\n          \"audio_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"escalate_to_human\",\n                \"description\": \"Escalate the conversation to a human agent when user frustration is detected\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"reason\": {\n                      \"type\": \"string\",\n                      \"description\": \"The reason for escalation\"\n                    }\n                  },\n                  \"required\": [\n                    \"reason\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"stt\": {\n          \"stt_engine\": \"tavus-auto\",\n          \"hotwords\": \"This is a hotword example\"\n        }\n      },\n      \"created_at\": \"\",\n      \"updated_at\": \"string\"\n    }\n  ],\n  \"total_count\": 4746\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66d1f907-4546-4404-a99b-bb0cf3058396",
+              "name": "UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "persona_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d79e392-1f6b-4ef2-b391-9fc71aab014f",
+          "name": "Get Persona",
+          "request": {
+            "name": "Get Persona",
+            "description": {
+              "content": "This endpoint returns a single persona by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "personas",
+                ":persona_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persona_id",
+                  "description": "(Required) The unique identifier of the persona."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9310447b-aa3b-45e0-b630-6252fb9b7dc6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"persona_id\": \"pcb7a34da5fe\",\n      \"persona_name\": \"Life Coach\",\n      \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\",\n      \"default_replica_id\": \"r90bbd427f71\",\n      \"document_ids\": [\n        \"d1234567890\",\n        \"d2468101214\"\n      ],\n      \"document_tags\": [\n        \"product_info\",\n        \"company_policies\"\n      ],\n      \"layers\": {\n        \"llm\": {\n          \"model\": \"string\",\n          \"base_url\": \"your-base-url\",\n          \"api_key\": \"your-api-key\",\n          \"tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"get_current_weather\",\n                \"description\": \"Get the current weather in a given location\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"location\": {\n                      \"type\": \"string\",\n                      \"description\": \"The city and state, e.g. San Francisco, CA\"\n                    },\n                    \"unit\": {\n                      \"type\": \"string\",\n                      \"enum\": [\n                        \"celsius\",\n                        \"fahrenheit\"\n                      ]\n                    }\n                  },\n                  \"required\": [\n                    \"location\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"headers\": {\n            \"Authorization\": \"Bearer your-api-key\"\n          },\n          \"extra_body\": {\n            \"temperature\": 0.7,\n            \"top_p\": 0.9\n          }\n        },\n        \"tts\": {\n          \"api_key\": \"your-api-key\",\n          \"tts_engine\": \"elevenlabs\",\n          \"external_voice_id\": \"external-voice-id\",\n          \"voice_settings\": {\n            \"speed\": 0.5,\n            \"emotion\": [\n              \"positivity:high\",\n              \"curiosity\"\n            ]\n          },\n          \"tts_emotion_control\": true,\n          \"tts_model_name\": \"sonic-3\",\n          \"pronunciation_dictionary_id\": \"pd_abc123def456\"\n        },\n        \"perception\": {\n          \"perception_model\": \"raven-1\",\n          \"visual_awareness_queries\": [\n            \"Is the user showing an ID card?\",\n            \"Does the user appear distressed or uncomfortable?\"\n          ],\n          \"visual_tool_prompt\": \"You have a tool to notify the system when an ID card is detected, named `notify_if_id_shown`. You MUST use this tool when a form of ID is detected.\",\n          \"visual_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"notify_if_id_shown\",\n                \"description\": \"Use this function when a drivers license or passport is detected in the image with high confidence. After collecting the ID, internally use final_ask()\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id_type\": {\n                      \"type\": \"string\",\n                      \"description\": \"best guess on what type of ID it is\"\n                    }\n                  },\n                  \"required\": [\n                    \"id_type\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"audio_awareness_queries\": [\n            \"Does the user sound frustrated or confused?\",\n            \"Is the user speaking quickly as if in a hurry?\"\n          ],\n          \"audio_tool_prompt\": \"You have a tool to escalate to a human agent when the user sounds very frustrated, named `escalate_to_human`. Use this tool when detecting sustained frustration.\",\n          \"audio_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"escalate_to_human\",\n                \"description\": \"Escalate the conversation to a human agent when user frustration is detected\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"reason\": {\n                      \"type\": \"string\",\n                      \"description\": \"The reason for escalation\"\n                    }\n                  },\n                  \"required\": [\n                    \"reason\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"stt\": {\n          \"stt_engine\": \"tavus-auto\",\n          \"hotwords\": \"This is a hotword example\"\n        }\n      },\n      \"created_at\": \"\",\n      \"updated_at\": \"string\"\n    },\n    {\n      \"persona_id\": \"pcb7a34da5fe\",\n      \"persona_name\": \"Life Coach\",\n      \"system_prompt\": \"As a Life Coach, you are a dedicated professional who specializes in...\",\n      \"default_replica_id\": \"r90bbd427f71\",\n      \"document_ids\": [\n        \"d1234567890\",\n        \"d2468101214\"\n      ],\n      \"document_tags\": [\n        \"product_info\",\n        \"company_policies\"\n      ],\n      \"layers\": {\n        \"llm\": {\n          \"model\": \"string\",\n          \"base_url\": \"your-base-url\",\n          \"api_key\": \"your-api-key\",\n          \"tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"get_current_weather\",\n                \"description\": \"Get the current weather in a given location\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"location\": {\n                      \"type\": \"string\",\n                      \"description\": \"The city and state, e.g. San Francisco, CA\"\n                    },\n                    \"unit\": {\n                      \"type\": \"string\",\n                      \"enum\": [\n                        \"celsius\",\n                        \"fahrenheit\"\n                      ]\n                    }\n                  },\n                  \"required\": [\n                    \"location\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"headers\": {\n            \"Authorization\": \"Bearer your-api-key\"\n          },\n          \"extra_body\": {\n            \"temperature\": 0.7,\n            \"top_p\": 0.9\n          }\n        },\n        \"tts\": {\n          \"api_key\": \"your-api-key\",\n          \"tts_engine\": \"elevenlabs\",\n          \"external_voice_id\": \"external-voice-id\",\n          \"voice_settings\": {\n            \"speed\": 0.5,\n            \"emotion\": [\n              \"positivity:high\",\n              \"curiosity\"\n            ]\n          },\n          \"tts_emotion_control\": true,\n          \"tts_model_name\": \"sonic-3\",\n          \"pronunciation_dictionary_id\": \"pd_abc123def456\"\n        },\n        \"perception\": {\n          \"perception_model\": \"raven-1\",\n          \"visual_awareness_queries\": [\n            \"Is the user showing an ID card?\",\n            \"Does the user appear distressed or uncomfortable?\"\n          ],\n          \"visual_tool_prompt\": \"You have a tool to notify the system when an ID card is detected, named `notify_if_id_shown`. You MUST use this tool when a form of ID is detected.\",\n          \"visual_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"notify_if_id_shown\",\n                \"description\": \"Use this function when a drivers license or passport is detected in the image with high confidence. After collecting the ID, internally use final_ask()\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id_type\": {\n                      \"type\": \"string\",\n                      \"description\": \"best guess on what type of ID it is\"\n                    }\n                  },\n                  \"required\": [\n                    \"id_type\"\n                  ]\n                }\n              }\n            }\n          ],\n          \"audio_awareness_queries\": [\n            \"Does the user sound frustrated or confused?\",\n            \"Is the user speaking quickly as if in a hurry?\"\n          ],\n          \"audio_tool_prompt\": \"You have a tool to escalate to a human agent when the user sounds very frustrated, named `escalate_to_human`. Use this tool when detecting sustained frustration.\",\n          \"audio_tools\": [\n            {\n              \"type\": \"function\",\n              \"function\": {\n                \"name\": \"escalate_to_human\",\n                \"description\": \"Escalate the conversation to a human agent when user frustration is detected\",\n                \"parameters\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"reason\": {\n                      \"type\": \"string\",\n                      \"description\": \"The reason for escalation\"\n                    }\n                  },\n                  \"required\": [\n                    \"reason\"\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"stt\": {\n          \"stt_engine\": \"tavus-auto\",\n          \"hotwords\": \"This is a hotword example\"\n        }\n      },\n      \"created_at\": \"\",\n      \"updated_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25f07d35-48d2-45e0-81a5-449cd7b6fe84",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid persona_id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3eb1693c-605c-4056-82e7-9b424a30f655",
+              "name": "UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c40c465b-0084-4b2f-aa57-f6754e32ad73",
+          "name": "Delete Persona",
+          "request": {
+            "name": "Delete Persona",
+            "description": {
+              "content": "This endpoint deletes a single persona by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "personas",
+                ":persona_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persona_id",
+                  "description": "(Required) The unique identifier of the persona."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a49a199b-0129-45dc-bb91-e40bd954474c",
+              "name": "NO CONTENT",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4514acaa-118f-4a5c-a131-7fb4a9256e86",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid persona_id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "158e8454-5f9e-4bba-a67f-7ea2d24abe12",
+              "name": "UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2015cc36-10f6-43e9-b4d2-13578d10c9d2",
+          "name": "Patch Persona",
+          "request": {
+            "name": "Patch Persona",
+            "description": {
+              "content": "This endpoint allows you to update specific fields of a persona using JSON Patch operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "personas",
+                ":persona_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "persona_id",
+                  "description": "(Required) The unique identifier of the persona."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2ac45c3-efbf-4f99-8dc1-4098a4f503a2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/system_prompt\",\n    \"value\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf9209fe-46bf-4d8f-863e-46266acb4eed",
+              "name": "No changes were made to the persona",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/system_prompt\",\n    \"value\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No changes were made to the persona\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d988bf85-7e69-42fc-bbe2-d02bb9477e64",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/system_prompt\",\n    \"value\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid persona_id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42a547bb-1d6a-4811-b001-a326568ece34",
+              "name": "Invalid JSON patch format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "personas",
+                    ":persona_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "persona_id",
+                      "description": "(Required) The unique identifier of the persona."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/system_prompt\",\n    \"value\": \"As a Life Coach, you are a dedicated professional who specializes in...\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid JSON patch format\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tavusapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2dad9091-cb61-4f0f-b711-ee37f7dec461",
+    "name": "Tavus Developer API Collection Conversations Personas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

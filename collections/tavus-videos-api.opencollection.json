@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Videos API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Videos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/videos",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of videos to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return (0-indexed). Default is 0 (first page)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Videos created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Generate Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/videos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint generates a new video using a Replica and either a script or an audio file.\n"
+        },
+        {
+          "info": {
+            "name": "Get Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/videos/:video_id",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the video."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response will include additional video data such as the thumbnail image and gif links."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single video by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/videos/:video_id",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video generation."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the video and associated assets (such as thumbnail images) will be hard deleted. CAUTION: This action is irrevocable."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single video by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Rename Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/videos/:video_id/name",
+            "params": [
+              {
+                "name": "video_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video generation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint renames a single video by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

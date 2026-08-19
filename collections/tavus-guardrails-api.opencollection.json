@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Guardrails API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Guardrails",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Guardrails (All Sets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/guardrails",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of guardrails to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all sets of guardrails.\n"
+        },
+        {
+          "info": {
+            "name": "Create Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/guardrails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new set of guardrails for a persona. Guardrails provide strict behavioral boundaries and guidelines that will be rigorously followed throughout conversations.\n"
+        },
+        {
+          "info": {
+            "name": "Get Guardrails (One Set)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single set of guardrails by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Patch Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to update specific fields of guardrails using JSON Patch operations."
+        },
+        {
+          "info": {
+            "name": "Delete Guardrails",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/guardrails/:guardrails_id",
+            "params": [
+              {
+                "name": "guardrails_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the guardrails."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single set of guardrails by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

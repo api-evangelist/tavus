@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Objectives API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Objectives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Objectives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/objectives",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of objectives to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all objectives.\n"
+        },
+        {
+          "info": {
+            "name": "Create Objectives",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/objectives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates objectives for a persona.\n"
+        },
+        {
+          "info": {
+            "name": "Get Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single objective by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Patch Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to update specific fields of an objective using JSON Patch operations.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/objectives/:objectives_id",
+            "params": [
+              {
+                "name": "objectives_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the objective."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single objective by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

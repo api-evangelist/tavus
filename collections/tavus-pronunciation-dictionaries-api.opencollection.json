@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Pronunciation Dictionaries API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pronunciation Dictionaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Pronunciation Dictionaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results per page. Range: 1-100."
+              },
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Zero-based page number."
+              },
+              {
+                "name": "sort",
+                "value": "desc",
+                "type": "query",
+                "description": "Sort order by creation date."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all pronunciation dictionaries for the authenticated user with pagination.\n"
+        },
+        {
+          "info": {
+            "name": "Create Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a [pronunciation dictionary](/sections/conversational-video-interface/persona/pronunciation-dictionaries) with custom rules for controlling how words are spoken. Rules are automatically synced to both Cartesia and ElevenLabs so they work regardless of which TTS engine your persona uses.\n"
+        },
+        {
+          "info": {
+            "name": "Get Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a pronunciation dictionary by its ID, including all rules.\n"
+        },
+        {
+          "info": {
+            "name": "Update Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a pronunciation dictionary's name or rules using [JSON Patch](https://jsonpatch.com/) format (RFC 6902). Supported mutable fields are `name` and `rules`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Pronunciation Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/pronunciation-dictionaries/:dictionary_id",
+            "params": [
+              {
+                "name": "dictionary_id",
+                "value": "pd_abc123def456gh",
+                "type": "path",
+                "description": "The unique identifier of the pronunciation dictionary to delete.\n\n**Warning:** This action is permanent. The dictionary is deleted from both Cartesia and ElevenLabs, and all personas referencing it will have their `pronunciation_dictionary_id` set to `null` and provider-specific pronunciation settings removed from `voice_settings`.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Permanently delete a pronunciation dictionary and remove it from all linked personas.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

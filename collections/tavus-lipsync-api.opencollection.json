@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations Lipsync API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lipsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Lipsyncs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/lipsync",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of lipsyncs to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a list of all Lipsyncs created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "Create Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/lipsync",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nCreate a new lipsync video by providing a video URL and an audio URL. The service will synchronize the speaker's mouth movements with the provided audio.\n"
+        },
+        {
+          "info": {
+            "name": "Get Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/lipsync/:lipsync_id",
+            "params": [
+              {
+                "name": "lipsync_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the lipsync request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint returns a single lipsync by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Lipsync",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/lipsync/:lipsync_id",
+            "params": [
+              {
+                "name": "lipsync_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier for the lipsync request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is no longer supported by Tavus.\n\nThis endpoint deletes a single lipsync by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

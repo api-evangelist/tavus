@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tavus Developer API Collection Conversations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/conversations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of conversations to return per page. Default is 10."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return. Default is 1."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter the conversations by status. Possible values: active, ended."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a list of all Conversations created by the account associated with the API Key in use.\n"
+        },
+        {
+          "info": {
+            "name": "createConversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/conversations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint starts a real-time video conversation with your AI replica, powered by a persona that allows it to see, hear, and respond like a human.\n"
+        },
+        {
+          "info": {
+            "name": "Get Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Append `verbose=true` to the URL to receive additional event data in the response, including:\n- `shutdown_reason`: The reason why the conversation ended (e.g., \"participant_left_timeout\")\n- `system.replica_joined`: When the replica joined the conversation\n- `system.shutdown`: When and why the conversation ended\n- `application.transcription_ready`: The end-of-call transcript. Each entry in `properties.transcript` has `role` (`user` / `assistant` / `system` / `tool`), `content`, `timestamp` (Unix epoch float, seconds), `seconds_from_start`, `duration` (seconds, float) and `inference_id` where available.\n- `application.perception_analysis`: The final visual analysis of the user that includes their appearance, behavior, emotional states, and screen activities\n\nThis is particularly useful as an alternative to using the `callback_url` parameter on the [create conversation](/api-reference/conversations/create-conversation) endpoint for retrieving detailed conversation data.\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a single conversation by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              },
+              {
+                "name": "hard",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the conversation and associated assets will be hard deleted. CAUTION: This action is irrevocable."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a single conversation by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "End Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tavusapi.com/v2/conversations/:conversation_id/end",
+            "params": [
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the conversation."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint ends a single conversation by its unique identifier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
