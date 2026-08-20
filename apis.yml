@@ -36,6 +36,17 @@ tags:
   - Avatars
   - Replicas
   - Personalization
+  - Real-Time
+  - CVI
+  - Webhook
+tags_raw:
+  - Artificial Intelligence
+  - Generative AI
+  - Video
+  - Conversational AI
+  - Avatars
+  - Replicas
+  - Personalization
   - Real Time
   - CVI
   - Webhooks
@@ -53,6 +64,13 @@ apis:
   humanURL: https://docs.tavus.io/
   baseURL: https://tavusapi.com
   tags:
+  - Video
+  - Conversational AI
+  - Replicas
+  - Personas
+  - Real-Time
+  - Knowledge Base
+  tags_raw:
   - Video
   - Conversational AI
   - Replicas
@@ -159,6 +177,8 @@ apis:
   humanURL: https://docs.tavus.io/
   baseURL: https://tavusapi.com
   tags:
+  - Lip Sync
+  tags_raw:
   - Lipsync
   properties:
   - type: OpenAPI
