@@ -189,7 +189,7 @@ apis:
   humanURL: https://docs.tavus.io/
   baseURL: https://tavusapi.com
   tags:
-  - Lip Sync
+  - Lipsync
   tags_raw:
   - Lipsync
   properties:
