@@ -184,18 +184,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/tavus-guardrails-api-openapi.yml
-- aid: tavus:tavus-lipsync-api
-  name: Tavus Lipsync API
-  description: The Lipsync API from Tavus — 2 operation(s) for lipsync.
-  humanURL: https://docs.tavus.io/
-  baseURL: https://tavusapi.com
-  tags:
-  - Lip Sync
-  tags_raw:
-  - Lipsync
-  properties:
-  - type: OpenAPI
-    url: openapi/tavus-lipsync-api-openapi.yml
 - aid: tavus:tavus-objectives-api
   name: Tavus Objectives API
   description: The Objectives API from Tavus — 2 operation(s) for objectives.
@@ -277,6 +265,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/tavus-voices-api-openapi.yml
+- aid: tavus:tavus-lip-sync-api
+  name: Tavus Lip Sync API
+  description: The Lip Sync API from Tavus — 2 operation(s) for lip sync.
+  humanURL: https://docs.tavus.io/
+  baseURL: https://tavusapi.com
+  tags:
+  - Lip Sync
+  properties:
+  - type: OpenAPI
+    url: openapi/tavus-lip-sync-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/tavus-agentic-access.yml
