@@ -251,6 +251,8 @@ apis:
   humanURL: https://docs.tavus.io/
   baseURL: https://tavusapi.com
   tags:
+  - Video
+  tags_raw:
   - Videos
   properties:
   - type: OpenAPI
@@ -261,6 +263,8 @@ apis:
   humanURL: https://docs.tavus.io/
   baseURL: https://tavusapi.com
   tags:
+  - Voice
+  tags_raw:
   - Voices
   properties:
   - type: OpenAPI
