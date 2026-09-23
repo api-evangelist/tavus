@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Videos API
+  title: Tavus Developer API Collection Videos API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Videos
       summary: List Videos
-      description: 'This endpoint returns a list of all Videos created by the account associated with the API Key in use.
-
-        '
+      description: This endpoint returns a list of all Videos created by the account associated with the API Key in use.
       operationId: listVideos
       parameters:
       - in: query
@@ -118,9 +116,7 @@ paths:
       tags:
       - Videos
       summary: Generate Video
-      description: 'This endpoint generates a new video using a Replica and either a script or an audio file.
-
-        '
+      description: This endpoint generates a new video using a Replica and either a script or an audio file.
       operationId: generateVideo
       requestBody:
         description: 'The only required body parameters are `replica_id` and either `script` or `audio_url`.
@@ -300,9 +296,7 @@ paths:
       tags:
       - Videos
       summary: Get Video
-      description: 'This endpoint returns a single video by its unique identifier.
-
-        '
+      description: This endpoint returns a single video by its unique identifier.
       operationId: getVideo
       parameters:
       - in: path
@@ -393,9 +387,7 @@ paths:
       tags:
       - Videos
       summary: Delete Video
-      description: 'This endpoint deletes a single video by its unique identifier.
-
-        '
+      description: This endpoint deletes a single video by its unique identifier.
       operationId: deleteVideo
       parameters:
       - name: video_id
@@ -451,9 +443,7 @@ paths:
       tags:
       - Videos
       summary: Rename Video
-      description: 'This endpoint renames a single video by its unique identifier.
-
-        '
+      description: This endpoint renames a single video by its unique identifier.
       operationId: renameVideo
       requestBody:
         content:

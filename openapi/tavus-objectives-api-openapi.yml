@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Objectives API
+  title: Tavus Developer API Collection Objectives API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Objectives
       summary: Create Objectives
-      description: 'This endpoint creates objectives for a persona.
-
-        '
+      description: This endpoint creates objectives for a persona.
       operationId: createObjectives
       requestBody:
         content:
@@ -135,9 +133,7 @@ paths:
       tags:
       - Objectives
       summary: Get Objectives
-      description: 'This endpoint returns a list of all objectives.
-
-        '
+      description: This endpoint returns a list of all objectives.
       operationId: getObjectives
       parameters:
       - in: query
@@ -245,9 +241,7 @@ paths:
       tags:
       - Objectives
       summary: Get Objective
-      description: 'This endpoint returns a single objective by its unique identifier.
-
-        '
+      description: This endpoint returns a single objective by its unique identifier.
       operationId: getObjective
       parameters:
       - name: objectives_id
@@ -354,9 +348,7 @@ paths:
       tags:
       - Objectives
       summary: Patch Objective
-      description: 'This endpoint allows you to update specific fields of an objective using JSON Patch operations.
-
-        '
+      description: This endpoint allows you to update specific fields of an objective using JSON Patch operations.
       operationId: patchObjective
       requestBody:
         description: "**Note:** The `path` field is a JSON Pointer string that references a location within the target document where the operation is performed.\n\nFor example:\n\n```json\n[\n  { \"op\": \"replace\", \"path\": \"/data/0/objective_name\", \"value\": \"updated_objective_name\" },\n  { \"op\": \"replace\", \"path\": \"/data/0/objective_prompt\", \"value\": \"Updated prompt for the objective\" },\n  { \"op\": \"replace\", \"path\": \"/data/0/confirmation_mode\", \"value\": \"manual\" },\n  { \"op\": \"add\", \"path\": \"/data/0/output_variables\", \"value\": [\"new_variable\"] },\n  { \"op\": \"replace\", \"path\": \"/data/0/modality\", \"value\": \"visual\" },\n  { \"op\": \"remove\", \"path\": \"/data/0/callback_url\" }\n]\n```\n"
@@ -463,9 +455,7 @@ paths:
       tags:
       - Objectives
       summary: Delete Objective
-      description: 'This endpoint deletes a single objective by its unique identifier.
-
-        '
+      description: This endpoint deletes a single objective by its unique identifier.
       operationId: deleteObjective
       responses:
         '204':

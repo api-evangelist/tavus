@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Transcriptions API
+  title: Tavus Developer API Collection Transcriptions API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Transcriptions
       summary: Create Transcription
-      description: 'This endpoint creates a transcription request that will convert speech to text in your video content.
-
-        '
+      description: This endpoint creates a transcription request that will convert speech to text in your video content.
       operationId: createTranscription
       requestBody:
         content:
@@ -61,9 +59,7 @@ paths:
       tags:
       - Transcriptions
       summary: List Transcriptions
-      description: 'This endpoint returns a list of all Transcriptions created by the account associated with the API Key in use.
-
-        '
+      description: This endpoint returns a list of all Transcriptions created by the account associated with the API Key in use.
       operationId: listTranscriptions
       parameters:
       - in: query
@@ -116,9 +112,7 @@ paths:
       tags:
       - Transcriptions
       summary: Get Transcription
-      description: 'This endpoint returns a single transcription by its unique identifier.
-
-        '
+      description: This endpoint returns a single transcription by its unique identifier.
       operationId: getTranscription
       parameters:
       - in: path
@@ -158,9 +152,7 @@ paths:
       tags:
       - Transcriptions
       summary: Delete Transcription
-      description: 'This endpoint deletes a single transcription by its unique identifier.
-
-        '
+      description: This endpoint deletes a single transcription by its unique identifier.
       operationId: deleteTranscription
       parameters:
       - in: path

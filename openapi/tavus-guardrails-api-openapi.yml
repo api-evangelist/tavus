@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Guardrails API
+  title: Tavus Developer API Collection Guardrails API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Guardrails
       summary: Create Guardrails
-      description: 'This endpoint creates a new set of guardrails for a persona. Guardrails provide strict behavioral boundaries and guidelines that will be rigorously followed throughout conversations.
-
-        '
+      description: This endpoint creates a new set of guardrails for a persona. Guardrails provide strict behavioral boundaries and guidelines that will be rigorously followed throughout conversations.
       operationId: createGuardrails
       requestBody:
         content:
@@ -109,9 +107,7 @@ paths:
       tags:
       - Guardrails
       summary: Get Guardrails (All Sets)
-      description: 'This endpoint returns a list of all sets of guardrails.
-
-        '
+      description: This endpoint returns a list of all sets of guardrails.
       operationId: getGuardrails
       parameters:
       - in: query
@@ -180,9 +176,7 @@ paths:
       tags:
       - Guardrails
       summary: Get Guardrails (One Set)
-      description: 'This endpoint returns a single set of guardrails by its unique identifier.
-
-        '
+      description: This endpoint returns a single set of guardrails by its unique identifier.
       operationId: getGuardrail
       responses:
         '200':
@@ -363,9 +357,7 @@ paths:
       tags:
       - Guardrails
       summary: Delete Guardrails
-      description: 'This endpoint deletes a single set of guardrails by its unique identifier.
-
-        '
+      description: This endpoint deletes a single set of guardrails by its unique identifier.
       operationId: deleteGuardrails
       responses:
         '204':

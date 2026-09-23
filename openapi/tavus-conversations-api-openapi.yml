@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Tavus Developer API Collection Conversations API
   version: 1.0.0
@@ -14,9 +14,7 @@ paths:
     post:
       tags:
       - Conversations
-      description: 'This endpoint starts a real-time video conversation with your AI replica, powered by a persona that allows it to see, hear, and respond like a human.
-
-        '
+      description: This endpoint starts a real-time video conversation with your AI replica, powered by a persona that allows it to see, hear, and respond like a human.
       operationId: createConversation
       requestBody:
         content:
@@ -280,13 +278,13 @@ paths:
                     type: string
                     description: The error message.
                     example: Invalid access token
+      summary: Create conversation
+      x-summary-source: derived
     get:
       tags:
       - Conversations
       summary: List Conversations
-      description: 'This endpoint returns a list of all Conversations created by the account associated with the API Key in use.
-
-        '
+      description: This endpoint returns a list of all Conversations created by the account associated with the API Key in use.
       operationId: listConversations
       parameters:
       - in: query
@@ -382,9 +380,7 @@ paths:
       tags:
       - Conversations
       summary: Get Conversation
-      description: 'This endpoint returns a single conversation by its unique identifier.
-
-        '
+      description: This endpoint returns a single conversation by its unique identifier.
       operationId: getConversation
       parameters:
       - name: verbose
@@ -454,8 +450,9 @@ paths:
                     example: ''
                     description: The date and time of when the conversation was last updated.
                   events:
-                    type: array
-                    nullable: true
+                    type:
+                    - array
+                    - 'null'
                     description: When `verbose=true`, additional conversation events (e.g. shutdown, perception analysis payloads, end-of-call transcript).
                     items:
                       type: object
@@ -542,9 +539,7 @@ paths:
       tags:
       - Conversations
       summary: Delete Conversation
-      description: 'This endpoint deletes a single conversation by its unique identifier.
-
-        '
+      description: This endpoint deletes a single conversation by its unique identifier.
       operationId: deleteConversation
       parameters:
       - name: hard
@@ -593,9 +588,7 @@ paths:
       tags:
       - Conversations
       summary: End Conversation
-      description: 'This endpoint ends a single conversation by its unique identifier.
-
-        '
+      description: This endpoint ends a single conversation by its unique identifier.
       operationId: endConversation
       responses:
         '200':

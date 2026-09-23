@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Personas API
+  title: Tavus Developer API Collection Personas API
   version: 1.0.0
   contact: {}
 servers:
@@ -467,9 +467,7 @@ paths:
       tags:
       - Personas
       summary: List Personas
-      description: 'This endpoint returns a list of all Personas created by the account associated with the API Key in use.
-
-        '
+      description: This endpoint returns a list of all Personas created by the account associated with the API Key in use.
       operationId: listPersonas
       parameters:
       - in: query
@@ -763,9 +761,7 @@ paths:
       tags:
       - Personas
       summary: Get Persona
-      description: 'This endpoint returns a single persona by its unique identifier.
-
-        '
+      description: This endpoint returns a single persona by its unique identifier.
       operationId: getPersona
       responses:
         '200':
@@ -1049,9 +1045,7 @@ paths:
       tags:
       - Personas
       summary: Delete Persona
-      description: 'This endpoint deletes a single persona by its unique identifier.
-
-        '
+      description: This endpoint deletes a single persona by its unique identifier.
       operationId: deletePersona
       parameters:
       - name: persona_id

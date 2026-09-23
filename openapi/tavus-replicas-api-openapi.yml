@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Replicas API
+  title: Tavus Developer API Collection Replicas API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Replicas
       summary: List Replicas
-      description: 'This endpoint returns a list of all Replicas created by the account associated with the API Key in use.
-
-        '
+      description: This endpoint returns a list of all Replicas created by the account associated with the API Key in use.
       operationId: listReplicas
       parameters:
       - in: query
@@ -117,7 +115,7 @@ paths:
       tags:
       - Replicas
       summary: Create Replica
-      description: Creates a new replica from a training video or image URL for use in conversations—see [Which training path?](/sections/replica/which-training-path) for preparation, consent, and media requirements.
+      description: Creates a new replica from a training video or image URL for use in conversations—see Which training path? for preparation, consent, and media requirements.
       operationId: createReplica
       requestBody:
         content:
@@ -257,9 +255,7 @@ paths:
       tags:
       - Replicas
       summary: Get Replica
-      description: 'This endpoint returns a single Replica by its unique identifier.
-
-        '
+      description: This endpoint returns a single Replica by its unique identifier.
       operationId: getReplica
       parameters:
       - in: path
@@ -309,8 +305,9 @@ paths:
                     example: '2024-01-24T07:14:03.327Z'
                     description: The date and time of when the replica was last updated.
                   error_message:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: When `status` is `error`, contains details about the training failure; otherwise typically null.
                   replica_type:
                     type: string
@@ -404,9 +401,7 @@ paths:
       tags:
       - Replicas
       summary: Rename Replica
-      description: 'This endpoint renames a single Replica by its unique identifier.
-
-        '
+      description: This endpoint renames a single Replica by its unique identifier.
       operationId: renameReplica
       requestBody:
         content:

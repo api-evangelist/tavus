@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Lipsync API
+  title: Tavus Developer API Collection Lipsync API
   version: 1.0.0
   contact: {}
 servers:
@@ -8,20 +8,18 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: Lipsync
+- name: Lip Sync
 paths:
   /v2/lipsync:
     post:
       tags:
-      - Lipsync
+      - Lip Sync
       summary: Create Lipsync
       deprecated: true
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        Create a new lipsync video by providing a video URL and an audio URL. The service will synchronize the speaker''s mouth movements with the provided audio.
-
-        '
+        Create a new lipsync video by providing a video URL and an audio URL. The service will synchronize the speaker''s mouth movements with the provided audio.'
       operationId: createLipsync
       requestBody:
         content:
@@ -61,8 +59,9 @@ paths:
                     description: A unique identifier for the lipsync request.
                     example: wf85407a7ba9d
                   lipsync_name:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The name of the lipsync request.
                     example: My Lipsync Video
                   status:
@@ -107,15 +106,13 @@ paths:
       - apiKey: []
     get:
       tags:
-      - Lipsync
+      - Lip Sync
       summary: List Lipsyncs
       deprecated: true
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint returns a list of all Lipsyncs created by the account associated with the API Key in use.
-
-        '
+        This endpoint returns a list of all Lipsyncs created by the account associated with the API Key in use.'
       operationId: listLipsyncs
       parameters:
       - in: query
@@ -186,15 +183,13 @@ paths:
   /v2/lipsync/{lipsync_id}:
     get:
       tags:
-      - Lipsync
+      - Lip Sync
       summary: Get Lipsync
       deprecated: true
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint returns a single lipsync by its unique identifier.
-
-        '
+        This endpoint returns a single lipsync by its unique identifier.'
       operationId: getLipsync
       parameters:
       - in: path
@@ -263,15 +258,13 @@ paths:
       - apiKey: []
     delete:
       tags:
-      - Lipsync
+      - Lip Sync
       summary: Delete Lipsync
       deprecated: true
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint deletes a single lipsync by its unique identifier.
-
-        '
+        This endpoint deletes a single lipsync by its unique identifier.'
       operationId: deleteLipsync
       parameters:
       - in: path

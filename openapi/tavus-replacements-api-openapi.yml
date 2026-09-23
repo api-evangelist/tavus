@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Replacements API
+  title: Tavus Developer API Collection Replacements API
   version: 1.0.0
   contact: {}
 servers:
@@ -19,9 +19,7 @@ paths:
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint creates a test word replacement request that will modify specific words or phrases in an existing video.
-
-        '
+        This endpoint creates a test word replacement request that will modify specific words or phrases in an existing video.'
       operationId: createReplacement
       requestBody:
         content:
@@ -80,9 +78,7 @@ paths:
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint returns a list of all Replacements created by the account associated with the API Key in use.
-
-        '
+        This endpoint returns a list of all Replacements created by the account associated with the API Key in use.'
       operationId: listReplacements
       parameters:
       - in: query
@@ -136,9 +132,7 @@ paths:
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint returns a single replacement by its unique identifier.
-
-        '
+        This endpoint returns a single replacement by its unique identifier.'
       operationId: getReplacement
       parameters:
       - in: path
@@ -178,9 +172,7 @@ paths:
       description: 'This endpoint is no longer supported by Tavus.
 
 
-        This endpoint deletes a single replacement by its unique identifier.
-
-        '
+        This endpoint deletes a single replacement by its unique identifier.'
       operationId: deleteReplacement
       parameters:
       - in: path

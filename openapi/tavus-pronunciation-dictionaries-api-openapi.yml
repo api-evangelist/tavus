@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Pronunciation Dictionaries API
+  title: Tavus Developer API Collection Pronunciation Dictionaries…
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Pronunciation Dictionaries
       summary: Create Pronunciation Dictionary
-      description: 'Create a [pronunciation dictionary](/sections/conversational-video-interface/persona/pronunciation-dictionaries) with custom rules for controlling how words are spoken. Rules are automatically synced to both Cartesia and ElevenLabs so they work regardless of which TTS engine your persona uses.
-
-        '
+      description: Create a pronunciation dictionary with custom rules for controlling how words are spoken. Rules are automatically synced to both Cartesia and ElevenLabs so they work regardless of which TTS engine your persona uses.
       operationId: createPronunciationDictionary
       requestBody:
         content:
@@ -150,9 +148,7 @@ paths:
       tags:
       - Pronunciation Dictionaries
       summary: List Pronunciation Dictionaries
-      description: 'List all pronunciation dictionaries for the authenticated user with pagination.
-
-        '
+      description: List all pronunciation dictionaries for the authenticated user with pagination.
       operationId: listPronunciationDictionaries
       parameters:
       - in: query
@@ -245,9 +241,7 @@ paths:
       tags:
       - Pronunciation Dictionaries
       summary: Get Pronunciation Dictionary
-      description: 'Retrieve a pronunciation dictionary by its ID, including all rules.
-
-        '
+      description: Retrieve a pronunciation dictionary by its ID, including all rules.
       operationId: getPronunciationDictionary
       parameters:
       - in: path
@@ -337,9 +331,7 @@ paths:
       tags:
       - Pronunciation Dictionaries
       summary: Update Pronunciation Dictionary
-      description: 'Update a pronunciation dictionary''s name or rules using [JSON Patch](https://jsonpatch.com/) format (RFC 6902). Supported mutable fields are `name` and `rules`.
-
-        '
+      description: Update a pronunciation dictionary's name or rules using JSON Patch format (RFC 6902). Supported mutable fields are `name` and `rules`.
       operationId: patchPronunciationDictionary
       parameters:
       - in: path
@@ -510,9 +502,7 @@ paths:
       tags:
       - Pronunciation Dictionaries
       summary: Delete Pronunciation Dictionary
-      description: 'Permanently delete a pronunciation dictionary and remove it from all linked personas.
-
-        '
+      description: Permanently delete a pronunciation dictionary and remove it from all linked personas.
       operationId: deletePronunciationDictionary
       parameters:
       - in: path

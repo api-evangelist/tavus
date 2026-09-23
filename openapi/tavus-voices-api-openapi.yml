@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tavus Developer API Collection Conversations Voices API
+  title: Tavus Developer API Collection Voices API
   version: 1.0.0
   contact: {}
 servers:
@@ -15,9 +15,7 @@ paths:
       tags:
       - Voices
       summary: List Voices
-      description: 'Returns available stock **`voice_name`** values and their linked **replica** metadata. When you [Create Replica](/api-reference/phoenix-replica-model/create-replica) with **`train_image_url`** (image-to-replica), **`voice_name`** is required—use this list to pick a valid slug and to preview options.
-
-        '
+      description: Returns available stock **`voice_name`** values and their linked **replica** metadata. When you Create Replica with **`train_image_url`** (image-to-replica), **`voice_name`** is required—use this list to pick a valid slug and to preview options.
       operationId: getVoices
       parameters:
       - name: limit
@@ -77,8 +75,9 @@ paths:
                           description: Replica identifier associated with this voice.
                           example: r90bbd427f71
                         audio_url:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: Optional preview URL (e.g. sample clip) when available.
                         tags:
                           type: array

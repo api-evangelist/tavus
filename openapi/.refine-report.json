@@ -1,18 +1,7 @@
 {
   "provider": "tavus",
   "sources": [
-    "tavus-conversations-api-openapi.yml",
-    "tavus-documents-api-openapi.yml",
-    "tavus-guardrails-api-openapi.yml",
-    "tavus-lipsync-api-openapi.yml",
-    "tavus-objectives-api-openapi.yml",
-    "tavus-personas-api-openapi.yml",
-    "tavus-pronunciation-dictionaries-api-openapi.yml",
-    "tavus-replacements-api-openapi.yml",
-    "tavus-replicas-api-openapi.yml",
-    "tavus-transcriptions-api-openapi.yml",
-    "tavus-videos-api-openapi.yml",
-    "tavus-voices-api-openapi.yml"
+    "_original/tavus-openapi.yml"
   ],
   "outputs": [
     "tavus-conversations-api-openapi.yml",
@@ -28,9 +17,32 @@
     "tavus-videos-api-openapi.yml",
     "tavus-voices-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tavus-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tavus-openapi.yml: declared missing tag: Guardrails",
+    "tavus-openapi.yml: declared missing tag: Lipsync",
+    "tavus-openapi.yml: declared missing tag: Objectives",
+    "superseded outputs removed: tavus-lip-sync-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 13 total)"
+  ],
+  "skipped": [
+    "tavus-conversations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-guardrails-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-lip-sync-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-objectives-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-personas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-pronunciation-dictionaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-replacements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-replicas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-transcriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-videos-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tavus-voices-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "resource": "https://mcp.tavus.io/mcp",
+  "authorization_servers": [
+    "https://mcp.tavus.io/"
+  ],
+  "scopes_supported": [
+    "tavus"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "resource_name": "Tavus MCP Server"
+}
