@@ -1,4 +1,4 @@
-# Tavus (tavus)
+# Tavus
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,78 +66,152 @@
 
 Tavus builds the Conversational Video Interface (CVI), an end-to-end pipeline that combines AI behavior with lifelike digital humans for real-time video conversations. The platform lets developers create personal AI replicas from a short video or a single image (Phoenix-4 and image-to-replica), generate async personalized videos, and run real-time conversational sessions backed by configurable personas, custom LLMs, tools, and document knowledge bases. Tavus targets product teams embedding human-like AI into sales, support, healthcare, education, and recruiting experiences, and monetizes through usage-based developer pricing and enterprise contracts.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tavus/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tavus/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Generative AI · Video · Conversational AI · Avatars · Replicas · Personalization · Real-Time · CVI · Webhook
 
-## Scope
+## Tavus on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Tavus is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tavus/](https://apis.io/providers/tavus/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (13)
 
-- Artificial Intelligence
-- Generative AI
-- Video
-- Conversational AI
-- Avatars
-- Replicas
-- Personalization
-- Real Time
-- CVI
-- Webhooks
+- [Tavus API](https://apis.io/apis/tavus/tavus-api/) — The Tavus REST API powers personalized video generation and real-time Conversational Video Interface sessions. It exposes endpoints for replicas (Phoenix-4…
+- [Tavus Conversations API](https://apis.io/apis/tavus/tavus-conversations-api/) — The Conversations API from Tavus — 3 operation(s) for conversations.
+- [Tavus Documents API](https://apis.io/apis/tavus/tavus-documents-api/) — The Documents API from Tavus — 3 operation(s) for documents.
+- [Tavus Guardrails API](https://apis.io/apis/tavus/tavus-guardrails-api/) — The Guardrails API from Tavus — 2 operation(s) for guardrails.
+- [Tavus Objectives API](https://apis.io/apis/tavus/tavus-objectives-api/) — The Objectives API from Tavus — 2 operation(s) for objectives.
+- [Tavus Personas API](https://apis.io/apis/tavus/tavus-personas-api/) — The Personas API from Tavus — 2 operation(s) for personas.
+- [Tavus Pronunciation Dictionaries API](https://apis.io/apis/tavus/tavus-pronunciation-dictionaries-api/) — The Pronunciation Dictionaries API from Tavus — 2 operation(s) for pronunciation dictionaries.
+- [Tavus Replacements API](https://apis.io/apis/tavus/tavus-replacements-api/) — The Replacements API from Tavus — 2 operation(s) for replacements.
+- [Tavus Replicas API](https://apis.io/apis/tavus/tavus-replicas-api/) — The Replicas API from Tavus — 3 operation(s) for replicas.
+- [Tavus Transcriptions API](https://apis.io/apis/tavus/tavus-transcriptions-api/) — The Transcriptions API from Tavus — 2 operation(s) for transcriptions.
+- [Tavus Videos API](https://apis.io/apis/tavus/tavus-videos-api/) — The Videos API from Tavus — 3 operation(s) for videos.
+- [Tavus Voices API](https://apis.io/apis/tavus/tavus-voices-api/) — The Voices API from Tavus — 1 operation(s) for voices.
+- [Tavus Lip Sync API](https://apis.io/apis/tavus/tavus-lip-sync-api/) — The Lip Sync API from Tavus — 2 operation(s) for lip sync.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-23
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Tavus API
+Model Context Protocol servers that expose the API to agents.
 
-The Tavus REST API powers personalized video generation and real-time Conversational Video Interface sessions. It exposes endpoints for replicas (Phoenix-4 video and image-to-replica), async video generation, real-time conversations, personas, and document knowledge bases, plus webhooks for lifecycle events.
+- [tavus](https://apis.io/servers/tavus/tavus/)
 
-- **Human URL:** [https://docs.tavus.io/](https://docs.tavus.io/)
-- **Base URL:** `https://tavusapi.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Video
-- Conversational AI
-- Replicas
-- Personas
-- Real Time
-- Knowledge Base
+- [Tavus Agentic Access](https://apis.io/agentic-access/tavus/tavus-agentic-access/)
 
-#### Properties
+#### Collections (13)
 
-- [Documentation](https://docs.tavus.io/)
-- [Getting Started](https://docs.tavus.io/sections/introduction)
-- [Sign Up](https://platform.tavus.io/auth/sign-up)
-- [A P I](https://docs.tavus.io/api-reference/overview)
-- [SDK](https://www.npmjs.com/package/@tavus/cvi-ui)
-- [GitHub Repository](https://github.com/Tavus-Engineering/tavus-examples)
-- [Pricing](https://www.tavus.io/pricing)
-- [Authentication](https://docs.tavus.io/api-reference/authentication)
-- [Postman Collection](collections/tavus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tavus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Tavus Developer API Collection](https://apis.io/collections/tavus/open-tavus/)
+- [Tavus Developer API Collection Conversations API](https://apis.io/collections/tavus/open-tavus-conversations-api/)
+- [Tavus Developer API Collection Conversations Documents API](https://apis.io/collections/tavus/open-tavus-documents-api/)
+- [Tavus Developer API Collection Conversations Guardrails API](https://apis.io/collections/tavus/open-tavus-guardrails-api/)
+- [Tavus Developer API Collection Conversations Lipsync API](https://apis.io/collections/tavus/open-tavus-lipsync-api/)
+- [Tavus Developer API Collection Conversations Objectives API](https://apis.io/collections/tavus/open-tavus-objectives-api/)
+- [Tavus Developer API Collection Conversations Personas API](https://apis.io/collections/tavus/open-tavus-personas-api/)
+- [Tavus Developer API Collection Conversations Pronunciation Dictionaries API](https://apis.io/collections/tavus/open-tavus-pronunciation-dictionaries-api/)
+- [Tavus Developer API Collection Conversations Replacements API](https://apis.io/collections/tavus/open-tavus-replacements-api/)
+- [Tavus Developer API Collection Conversations Replicas API](https://apis.io/collections/tavus/open-tavus-replicas-api/)
+- [Tavus Developer API Collection Conversations Transcriptions API](https://apis.io/collections/tavus/open-tavus-transcriptions-api/)
+- [Tavus Developer API Collection Conversations Videos API](https://apis.io/collections/tavus/open-tavus-videos-api/)
+- [Tavus Developer API Collection Conversations Voices API](https://apis.io/collections/tavus/open-tavus-voices-api/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tavus Authentication](https://apis.io/security/tavus/tavus-authentication/)
+- [Tavus Domain Security](https://apis.io/security/tavus/tavus-domain-security/)
+- [Tavus Trust Center](https://apis.io/security/tavus/tavus-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Tavus Plans Pricing](https://apis.io/plans/tavus/tavus-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Tavus Rate Limits](https://apis.io/rate-limits/tavus/tavus-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Tavus Finops](https://apis.io/finops/tavus/tavus-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.tavus.io)
 - [Documentation](https://docs.tavus.io)
-- [Blog](https://www.tavus.io/blog)
-- [GitHub Organization](https://github.com/Tavus-Engineering)
 - [Pricing](https://www.tavus.io/pricing)
-- [Terms of Service](https://www.tavus.io/legal/terms-of-service)
-- [Privacy Policy](https://www.tavus.io/legal/privacy-policy)
-- [X (Twitter)](https://x.com/heyTavus)
-- [LinkedIn](https://www.linkedin.com/company/tavus)
 - [Changelog](https://docs.tavus.io/changelog)
-- [L L Ms Txt](https://docs.tavus.io/llms.txt)
+- [Blog](https://www.tavus.io/blog)
+- [Terms of service](https://www.tavus.io/legal/terms-of-service)
+- [Privacy policy](https://www.tavus.io/legal/privacy-policy)
+- [GitHub](https://github.com/Tavus-Engineering)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 39.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 53.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 36.8 |
+
+**Agent readiness 50.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.5** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tavus/](https://apis.io/providers/tavus/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tavus: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tavus/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
